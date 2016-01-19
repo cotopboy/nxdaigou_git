@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  //some
+  //some TestTEst // 中亠方顺时而动加工 
    //var timer = $.timer(TimerTick);
   // timer.set({ time: 5000, autostart: true });
   // LoadMeterData();
