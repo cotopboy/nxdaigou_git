@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  //some
+  //中亠some//some//some//some//some//some//some//some//some//some//some//some//some//some//some//some
    //var timer = $.timer(TimerTick);
   // timer.set({ time: 5000, autostart: true });
   // LoadMeterData();
