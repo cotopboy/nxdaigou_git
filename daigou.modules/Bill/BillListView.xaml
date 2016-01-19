@@ -1,0 +1,144 @@
+﻿<UserControl x:Class="daigou.modules.Bill.BillListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="1200">
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+
+            <RowDefinition Height="3" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+            <DockPanel  Grid.Row="0" >
+                <Label  DockPanel.Dock="Left" Content="查找" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Button DockPanel.Dock="Right" Content="清除"  Margin="10 0" Width="100px" VerticalContentAlignment="Center" VerticalAlignment="Center" Command="{Binding CleanFilterTxtCommand}"/>
+                <TextBox Text="{Binding FilterTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Style="{StaticResource TB_NoBorder}" ></TextBox>
+            </DockPanel>
+
+
+        <DockPanel  Grid.Row="1">
+            <CheckBox DockPanel.Dock="Left" Content="只显示选中" VerticalContentAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding IsShowOnlySelected}"  Margin="10 0 20 0"/>
+            <CheckBox DockPanel.Dock="Left" Content="启用只显示" VerticalContentAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding IsTimeFilterEnabled}" Margin="10 0 0 0"  />
+            <Label  DockPanel.Dock="Left" Content="过去第" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <Label  DockPanel.Dock="Left" Width="40" HorizontalContentAlignment="Center" Content="{Binding ElementName=slider_lastDays, Path=Value, StringFormat={}{0:1f}}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <Label  DockPanel.Dock="Left" Content="天的记录" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <Button  DockPanel.Dock="Left" Content="&lt;&lt;" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 0 0 0" MinWidth="40" Command="{Binding FilterDayDecreaseCommand}"/>
+            <Button  DockPanel.Dock="Left" Content="&gt;&gt;" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 0" MinWidth="80" Command="{Binding FilterDayIncreaseCommand}"/>
+
+            <Slider Interval="1" Maximum="50" Value="{Binding Filterlastdays}" x:Name="slider_lastDays" SmallChange="1" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="False" IsMoveToPointEnabled="False" LargeChange="7" TickPlacement="Both" TickFrequency="1" Padding="0" Orientation="Horizontal" BorderThickness="1" />
+        </DockPanel>
+
+
+            <Grid Grid.Row="2"  >
+                <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="120" />
+            </Grid.ColumnDefinitions>
+                <StackPanel Grid.Row="1" Grid.Column="0" >
+                    <Button Content="新建" VerticalAlignment="Center" Command="{Binding AddNewItemCommand}"  Height="20"  Margin="2" Background="YellowGreen" />
+                    <Button Content="复制新建" VerticalAlignment="Center" Command="{Binding CopyAddNewCommand}" Height="20" Margin="2" Background="RosyBrown" />
+                    <Button Content="全部保存" VerticalAlignment="Center" Command="{Binding SaveAllCommand}" Height="48" Margin="2" Background="Orange" />                    
+                </StackPanel>
+                 <StackPanel Grid.Row="1" Grid.Column="2" >
+                     <Button Content="截图" VerticalAlignment="Center"   Height="48"  Margin="2" Background="#FF86C6D1" Click="Button_Click" />
+                    <Button Content="不选" Background="Pink"  Margin="2 " VerticalAlignment="Center" Command="{Binding DeSelectAllCommand}" Padding="5 0" />
+                    <Button Content="全选" Background="Green" Foreground="White" Margin="2" VerticalAlignment="Center" Command="{Binding SelectAllCommand}" Padding="5 0" />
+
+                  </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.Column="4" >
+                <Label FontSize="10" Padding="0" Content="欧元汇率"></Label>
+                <TextBox  Style="{StaticResource TB_NoBorder}" Text="{Binding Eruo2Cny}"></TextBox>
+                <Label FontSize="10" Padding="0" Content="再次费率"></Label>
+                <TextBox Style="{StaticResource TB_NoBorder}"  Text="{Binding SecondServiceRate}"></TextBox>
+                <Button Content="重新计算" VerticalAlignment="Center" Command="{Binding RecalculateCommand}"  Height="21"  Margin="2" Background="#FF86C6D1" />
+            </StackPanel>
+
+
+            <StackPanel Grid.Row="1" Grid.Column="6" >
+
+                <Button Content="8.5 * 1.0" VerticalAlignment="Center"   Height="29"  Margin="2" Background="Orange" Command="{Binding Recalculate_8_5_Command}"/>
+                <Button Content="7.5 * 1.0" VerticalAlignment="Center"   Height="26"  Margin="2" Background="Green" Command="{Binding Recalculate_7_5_Command}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.Column="8" >                
+                <Button Content="选中更新价格" VerticalAlignment="Center"   Height="26"  Margin="2" Background="Green" Command="{Binding UpdateSelectedPriceCommand}"/>
+                <Button Content="选中归到当天" VerticalAlignment="Center"   Height="26"  Margin="2" Background="LightBlue" Command="{Binding Selected2TodayCommand}"/>
+                <Button Content="选中生成邮件标题" VerticalAlignment="Center"   Height="31"  Margin="2" Background="LightBlue" Command="{Binding Selected2EmailTitleCommand}"/>
+            </StackPanel>
+
+
+            <StackPanel Grid.Row="1" Grid.Column="11" >
+                
+                <Button Content="删除选中" VerticalAlignment="Center" Command="{Binding DeleteCommand}" Height="20" Margin="2" Background="OrangeRed" />
+            </StackPanel>
+
+        </Grid>        
+            <Grid  Grid.Row="3" >
+            <StackPanel  Orientation="Horizontal"  >
+
+                <Label  FontSize="25" FontWeight="Black" HorizontalContentAlignment="Center" Content="金额总计:" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Label  FontSize="25" FontWeight="Black" HorizontalContentAlignment="Center" Content="{Binding BillSummayTotal}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Label  FontSize="25" FontWeight="Black" HorizontalContentAlignment="Center" Content="                " HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Label  FontSize="25" FontWeight="Black" HorizontalContentAlignment="Center" Content="单数总计:" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Label  FontSize="25" FontWeight="Black" HorizontalContentAlignment="Center" Content="{Binding SelectBillCount}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                
+            </StackPanel>
+                
+                
+        </Grid>
+
+
+
+        <GridSplitter Background="DarkGray"  ResizeDirection="Rows" Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ResizeBehavior="PreviousAndNext" />
+
+
+
+       
+                   
+            <ListView   Grid.Row="5"
+                   ItemTemplate="{StaticResource  BillListItemTemplate}"
+                   ItemsSource="{Binding BillListCollectionView}"
+                   BorderBrush="{x:Null}"
+                   IsSynchronizedWithCurrentItem="True" 
+                   HorizontalAlignment="Stretch"                    
+                   Name="listView" 
+                   VerticalAlignment="Stretch" 
+                   SelectedItem="{Binding SelectedItem}"
+                   HorizontalContentAlignment="Stretch"
+                   ScrollViewer.VerticalScrollBarVisibility="Visible"
+                   Height="auto"
+                   VirtualizingStackPanel.IsVirtualizing ="True" FontSize="18">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                    <Style.Resources>
+                        <!-- Background for Selected ListViewItem -->
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
+                                Color="#E7E7E7"/>
+                    </Style.Resources>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+        </ListView>
+
+
+
+    </Grid>
+</UserControl>

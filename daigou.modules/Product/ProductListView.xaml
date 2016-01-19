@@ -1,0 +1,144 @@
+﻿<UserControl x:Class="daigou.modules.Product.ProductListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"              
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="800">
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="180" />
+            <RowDefinition Height="3" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />                
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <DockPanel  Grid.Row="0" >
+                <Label  DockPanel.Dock="Left" Content="查找" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Button DockPanel.Dock="Right" Content="清除"  Margin="10 0" Width="100px" VerticalContentAlignment="Center" VerticalAlignment="Center" Command="{Binding CleanFilterTxtCommand}"/>
+                <TextBox Text="{Binding FilterTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Style="{StaticResource TB_NoBorder}" ></TextBox>
+            </DockPanel>
+
+            <TabControl  Grid.Row="1">
+                <TabItem Header="通用">
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="120" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Row="1" Grid.Column="0" >
+                            <Button Content="新建" VerticalAlignment="Center" Command="{Binding AddNewItemCommand}"  Height="20"  Margin="2" Background="YellowGreen" />
+                            <Button Content="复制新建" VerticalAlignment="Center" Command="{Binding CopyAddNewCommand}" Height="20" Margin="2" Background="RosyBrown" />
+                            <Button Content="全部保存" VerticalAlignment="Center" Command="{Binding SaveAllCommand}" Height="63" Margin="2" Background="Orange" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Grid.Column="2" >
+                            <Label FontSize="10" Padding="0" Content="欧元汇率"></Label>
+                            <TextBox  Style="{StaticResource TB_NoBorder}" Text="{Binding Eruo2Cny}"></TextBox>
+                            <Label FontSize="10" Padding="0" Content="再次费率"></Label>
+                            <TextBox Style="{StaticResource TB_NoBorder}"  Text="{Binding SecondServiceRate}"></TextBox>
+                            <Button Content="重新计算" VerticalAlignment="Center" Command="{Binding RecalculateCommand}"  Height="37"  Margin="2" Background="#FF86C6D1" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Grid.Column="4" >
+                            <Button Content="8.5 * 1.0" VerticalAlignment="Center"   Height="57"  Margin="2" Background="Orange" Command="{Binding Recalculate_8_5_Command}"/>
+                            <Button Content="7.5 * 1.0" VerticalAlignment="Center"   Height="49"  Margin="2" Background="Green" Command="{Binding Recalculate_7_5_Command}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Grid.Column="6" >
+
+
+                            <Button Content="截图" VerticalAlignment="Center"   Height="59"  Margin="2" Background="#FF86C6D1" Click="Button_Click" />
+
+                            <Button Content="选中添加新账单" VerticalAlignment="Center"   Height="48"  Margin="2" Background="PaleGreen" Command="{Binding SelectedItemsToNewBillCommand}" />
+
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Grid.Column="7" >
+
+                            <Button Content="删除选中" VerticalAlignment="Center" Command="{Binding DeleteCommand}" Height="23" Margin="2" Background="OrangeRed" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Grid.Column="9" >
+                            <Button Content="ID" VerticalAlignment="Center" Command="{Binding SortByIDCommand}" Height="20" Margin="1" Background="Goldenrod" />
+                            <Button Content="Name" VerticalAlignment="Center" Command="{Binding SortByNameCommand}" Height="20" Margin="1" Background="Goldenrod" />
+                            <Button Content="Brand" VerticalAlignment="Center" Command="{Binding SortByBrandCommand}" Height="20" Margin="1" Background="Goldenrod" />
+                            <Button Content="GrossProfit" VerticalAlignment="Center" Command="{Binding SortByGrossProfitCommand}" Height="20" Margin="1" Background="Goldenrod" />
+                            <Button Content="Clean" VerticalAlignment="Center" Command="{Binding CleanSortCommand}" Height="27" Margin="1" Background="YellowGreen" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Grid.Column="11" >
+                            <Button Content="全选" VerticalAlignment="Center" Command="{Binding SelectAllCommand}" Height="20" Margin="2" Background="LightBlue" />
+                            <Button Content="中选显示" VerticalAlignment="Center" Command="{Binding SelectDisplayedItemCommand}" Height="20" Margin="2" Background="LightBlue" />
+                            <Button Content="全不选" VerticalAlignment="Center" Command="{Binding DeSelectAllCommand}" Height="20" Margin="2" Background="LightCoral" />
+                            <Button Content="导出" VerticalAlignment="Center" Command="{Binding ExportCommand}" Height="39" Margin="2" Background="Orange" />
+                        </StackPanel>
+
+
+                    </Grid>
+                </TabItem>
+                <TabItem Header="高级">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="150"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="0"  Grid.Row="0"  Content="脚本"></Label>
+                        <TextBox Grid.Column="0"  Grid.Row ="1"  VerticalAlignment="Stretch" 
+                                 AcceptsReturn="True" AcceptsTab="True" AutoWordSelection="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible"
+                                 Text="{Binding ScriptText}" HorizontalAlignment="Stretch"></TextBox>
+
+                        <Button Grid.Column="1"  Content="运行脚本" Command="{Binding RunScriptCommand}"></Button>
+                    </Grid>
+                    
+                </TabItem>
+            </TabControl>
+            
+              
+          
+        </Grid>
+        
+        <GridSplitter Background="DarkGray"  ResizeDirection="Rows" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ResizeBehavior="PreviousAndNext" />
+
+        <ListView  Grid.Row="2"
+                    ItemsSource="{Binding ProductList}"
+                    ItemTemplate="{StaticResource  ProductListTemplate}" 
+                    BorderBrush="{x:Null}"
+                    HorizontalAlignment="Stretch"                    
+                    Name="listView" 
+                    VerticalAlignment="Stretch" 
+                    SelectedItem="{Binding SelectedItem}"
+                    HorizontalContentAlignment="Stretch"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto"
+                    VirtualizingStackPanel.IsVirtualizing ="True" FontSize="18">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+        </ListView>
+
+    </Grid>
+   
+</UserControl>
+
+
+<!---->

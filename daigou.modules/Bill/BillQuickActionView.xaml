@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="daigou.modules.Bill.BillQuickActionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="400">
+    <StackPanel >
+        <StackPanel.Resources>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Margin" Value="5"/>   
+                <Setter Property="Padding" Value="10 5 "/>
+            </Style>
+        </StackPanel.Resources>
+        <WrapPanel>
+            <Button Content="7kg"  Click="btnOnClick" Background="OrangeRed" />
+            <Button Content="8kg"  Click="btnOnClick" Background="OrangeRed"/>
+            <Button Content="9kg"  Click="btnOnClick" Background="OrangeRed"/>
+            <Button Content="10kg" Click="btnOnClick" Background="OrangeRed"/>
+            <Button Content="11kg"  Click="btnOnClick" Background="OrangeRed"/>
+            <Button Content="12kg" Click="btnOnClick" Background="OrangeRed"/>
+        </WrapPanel>
+        <WrapPanel>
+            <Button Content="atmp"  Click="btnOnClick" Background="LightBlue" />
+            <Button Content="atm1"  Click="btnOnClick" Background="LightBlue"/>
+            <Button Content="atm2"  Click="btnOnClick" Background="LightBlue"/>
+            <Button Content="atm3"  Click="btnOnClick" Background="LightBlue" />
+            <Button Content="atm1+" Click="btnOnClick" Background="LightBlue"/>
+            <Button Content="atm2+" Click="btnOnClick" Background="LightBlue"/>
+        </WrapPanel>
+        <WrapPanel>
+            <Button Content="hcp"  Click="btnOnClick" Background="YellowGreen"/>
+            <Button Content="hc1"  Click="btnOnClick" Background="YellowGreen"/>
+            <Button Content="hc2"  Click="btnOnClick" Background="YellowGreen"/>
+            <Button Content="hc3"  Click="btnOnClick" Background="YellowGreen"/>
+            <Button Content="hc1+" Click="btnOnClick" Background="YellowGreen"/>
+            <Button Content="hc2+" Click="btnOnClick" Background="YellowGreen"/>
+        </WrapPanel>
+        <WrapPanel>
+            <Button Content="hbp"  Click="btnOnClick" Background="LightGreen"/>
+            <Button Content="hb1"  Click="btnOnClick" Background="LightGreen"/>
+            <Button Content="hb2"  Click="btnOnClick" Background="LightGreen"/>
+            <Button Content="hb3" Click="btnOnClick"  Background="LightGreen"/>
+            <Button Content="hb1+" Click="btnOnClick" Background="LightGreen"/>        
+        </WrapPanel>
+
+        <WrapPanel>
+            <Button Content="op304"  Click="btnOnClick" Background="Orange" Width="174" />
+            <Button Content="opxs"  Click="btnOnClick" Background="Orange" Width="165" />
+
+        </WrapPanel>
+
+    </StackPanel>
+</UserControl>

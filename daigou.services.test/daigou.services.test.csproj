@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E6E428AE-438B-434F-8249-3717DB96825B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>daigou.services.test</RootNamespace>
+    <AssemblyName>daigou.services.test</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Xml" />
+    <Reference Include="utilities, Version=1.0.0.19, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\bin\utilities.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CnRecipientLabelBuilderTest.cs" />
+    <Compile Include="CnRecipientParserTest.cs" />
+    <Compile Include="DirectoryServiceTest.cs" />
+    <Compile Include="FileDBTest.cs" />
+    <Compile Include="ImapTest.cs" />
+    <Compile Include="JokeTest.cs" />
+    <Compile Include="PDFTextExtracterTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceReleaserTest.cs" />
+    <Compile Include="WaybillSearchTest.cs" />
+    <Compile Include="ZdBpostWaybillExtractorTest.cs" />
+    <Compile Include="ZdBpostWaybillPrinterTest1.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\daigou.dal\daigou.dal.csproj">
+      <Project>{4FDC4FBF-DBCF-4490-AE4D-235F95595FE7}</Project>
+      <Name>daigou.dal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\daigou.domain\daigou.domain.csproj">
+      <Project>{A0B8091A-00AE-4B23-86F5-037BE093F556}</Project>
+      <Name>daigou.domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\daigou.infrastructure\daigou.infrastructure.csproj">
+      <Project>{8AC3A579-9819-4CA6-A2BB-517A86F66196}</Project>
+      <Name>daigou.infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\daigou.main\daigou.main.csproj">
+      <Project>{69FE1432-2E95-4781-8C07-CECF337ADA02}</Project>
+      <Name>daigou.main</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\daigou.modules\daigou.modules.csproj">
+      <Project>{DCC5A623-9BEE-43EF-A4D3-2FA3329819CA}</Project>
+      <Name>daigou.modules</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\daigou.services\daigou.services.csproj">
+      <Project>{ABFA9E6A-E75E-47C3-8018-C4EB9FEF0DA0}</Project>
+      <Name>daigou.services</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy $(TargetPath) $(TargetDir)update_files /F /R /Y /I 
+ xcopy $(TargetDir)$(TargetName).pdb $(TargetDir)update_files /F /R /Y /I</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DCC5A623-9BEE-43EF-A4D3-2FA3329819CA}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>daigou.modules</RootNamespace>
+    <AssemblyName>daigou.modules</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LumiSoft.Net, Version=2.0.5161.15943, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Practices.Prism.UnityExtensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Practices.Unity, Version=2.1.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="utilities, Version=1.0.0.19, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="About\AboutModule.cs" />
+    <Compile Include="About\AboutNavi.xaml.cs">
+      <DependentUpon>AboutNavi.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="About\AboutView.xaml.cs">
+      <DependentUpon>AboutView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="About\AboutViewModel.cs" />
+    <Compile Include="Bill\BillItemVM.cs" />
+    <Compile Include="Bill\BillListView.xaml.cs">
+      <DependentUpon>BillListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Bill\BillListViewModel.cs" />
+    <Compile Include="Bill\BillModule.cs" />
+    <Compile Include="Bill\BillNavi.xaml.cs">
+      <DependentUpon>BillNavi.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Bill\BillQuickActionView.xaml.cs">
+      <DependentUpon>BillQuickActionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Bill\BillViewLayout.xaml.cs">
+      <DependentUpon>BillViewLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Bill\BillViewModel.cs" />
+    <Compile Include="Bill\SearchProductView.xaml.cs">
+      <DependentUpon>SearchProductView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Bill\SearchProductViewModel.cs" />
+    <Compile Include="Command\ProductVMContainer.cs" />
+    <Compile Include="Configuration\ConfigurationModule.cs" />
+    <Compile Include="Configuration\ConfigurationNavi.xaml.cs">
+      <DependentUpon>ConfigurationNavi.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration\ConfigurationView.xaml.cs">
+      <DependentUpon>ConfigurationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration\ConfigurationViewModel.cs" />
+    <Compile Include="DefaultContentModule.cs" />
+    <Compile Include="Header\HeaderModule.cs" />
+    <Compile Include="Header\HeaderView.xaml.cs">
+      <DependentUpon>HeaderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Order\ManualAddressCounterDialog.xaml.cs">
+      <DependentUpon>ManualAddressCounterDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Order\OrderModule.cs" />
+    <Compile Include="Order\OrderOperationNavi.xaml.cs">
+      <DependentUpon>OrderOperationNavi.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Order\OrderOperationView.xaml.cs">
+      <DependentUpon>OrderOperationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Order\OrderOperationViewModel.cs" />
+    <Compile Include="Order\OrderPrintNavi.xaml.cs">
+      <DependentUpon>OrderPrintNavi.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Order\OrderPrintView.xaml.cs">
+      <DependentUpon>OrderPrintView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Order\OrderPrintViewModel.cs" />
+    <Compile Include="Order\OrderViewModel.cs" />
+    <Compile Include="Product\AddEditProductView.xaml.cs">
+      <DependentUpon>AddEditProductView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\Events\ProductItemDoubleClickEvent.cs" />
+    <Compile Include="Product\Events\ProductNewItemCreatedEvent.cs" />
+    <Compile Include="Product\Events\ProductSellPriceChangedEvent.cs" />
+    <Compile Include="Product\Events\SelectedProductItemChangedEvent.cs" />
+    <Compile Include="Product\ProductListView.xaml.cs">
+      <DependentUpon>ProductListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\ProductListViewModel.cs" />
+    <Compile Include="Product\ProductModule.cs" />
+    <Compile Include="Product\ProductNavi.xaml.cs">
+      <DependentUpon>ProductNavi.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\ProductView.xaml.cs">
+      <DependentUpon>ProductView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product\ProductViewModel.cs" />
+    <Compile Include="Product\ProductItemViewModel.cs" />
+    <Compile Include="Recipient\AddRecipientView.xaml.cs">
+      <DependentUpon>AddRecipientView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Recipient\AddRecipientViewModel.cs" />
+    <Compile Include="Recipient\Agent.cs" />
+    <Compile Include="Recipient\AgentListService.cs" />
+    <Compile Include="Recipient\RecipientItemViewModel.cs" />
+    <Compile Include="Recipient\RecipientModule.cs" />
+    <Compile Include="Recipient\RecipientNavi.xaml.cs">
+      <DependentUpon>RecipientNavi.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Recipient\RecipientView.xaml.cs">
+      <DependentUpon>RecipientView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Recipient\RecipientViewModel.cs" />
+    <Compile Include="Welcome\WelcomeModule.cs" />
+    <Compile Include="Welcome\WelcomeNavi.xaml.cs">
+      <DependentUpon>WelcomeNavi.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Welcome\WelcomeView.xaml.cs">
+      <DependentUpon>WelcomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Welcome\WelcomeViewModel.cs" />
+    <Page Include="About\AboutNavi.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="About\AboutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Bill\BillListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Bill\BillNavi.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Bill\BillQuickActionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Bill\BillViewLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Bill\SearchProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Configuration\ConfigurationNavi.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Configuration\ConfigurationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Header\HeaderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Order\ManualAddressCounterDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Order\OrderOperationNavi.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Order\OrderOperationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Order\OrderPrintNavi.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Order\OrderPrintView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\AddEditProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\ProductListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\ProductNavi.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Product\ProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Recipient\AddRecipientView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Recipient\RecipientNavi.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Recipient\RecipientView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Welcome\WelcomeNavi.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Welcome\WelcomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\daigou.domain\daigou.domain.csproj">
+      <Project>{A0B8091A-00AE-4B23-86F5-037BE093F556}</Project>
+      <Name>daigou.domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\daigou.infrastructure\daigou.infrastructure.csproj">
+      <Project>{8AC3A579-9819-4CA6-A2BB-517A86F66196}</Project>
+      <Name>daigou.infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\daigou.services\daigou.services.csproj">
+      <Project>{ABFA9E6A-E75E-47C3-8018-C4EB9FEF0DA0}</Project>
+      <Name>daigou.services</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="About\ChangeLog.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\opera background.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy $(TargetPath) $(TargetDir)update_files /F /R /Y /I 
+ xcopy $(TargetDir)$(TargetName).pdb $(TargetDir)update_files /F /R /Y /I</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

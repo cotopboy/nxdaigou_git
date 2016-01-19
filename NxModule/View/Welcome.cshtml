@@ -1,0 +1,168 @@
+﻿@{
+	Layout = "View/_Layout.cshtml";
+	ViewBag.TestData = "View/_Layout.cshtml";
+}
+
+@section HeaderCss
+{
+<style type="text/css">
+
+.item_container
+{
+    font-family:Microsoft YaHei;
+    border-style: solid;
+    border-width: 1px;
+	height:152px;
+	margin:0px;
+	padding:0px;
+}
+
+.col_container
+{
+	height:150px;
+	display:inline-block;
+	overflow:hidden;
+}
+
+.item_image
+{
+	max-width: 100%;
+    max-height: 100%;
+}
+
+.vertical_stack
+{
+	margin:0;
+	border-style: solid;
+    border-width: 0px;
+	display:block;
+	line-height:25px;
+}
+
+.item_code
+{
+	font-weight:bold;	
+}
+
+.item_name
+{
+    font-size:20px;
+	font-weight:bold;
+	color:blue;
+}
+
+.item_price
+{
+	font-weight:bold;
+	color:orangered;
+}
+
+.item_spc
+{
+
+}
+
+.item_people
+{
+	padding-left:50px;
+}
+
+.item_tag
+{
+	padding-left:50px;
+}
+
+.item_remark
+{
+	color:Gray;
+}
+
+.item_weight
+{
+	
+}
+
+.item_image
+{
+	width:150px;
+	height:150px;
+	margin-left: auto;
+    margin-right: auto;
+	border-style: solid;
+    border-width: 0px;
+	display: block;
+}
+
+.brand_title
+{
+    font-size:35px;
+	font-weight:bold;
+	color:Blue;
+}
+
+</style>
+}
+
+  <div class="jumbotron">
+      <div class="container">
+        <h1>Nx代购商品价格表</h1>
+        <p>吕贝克Nx-daigou商品报价单</p>
+        <P>报价单里的价格均不包含邮费<P>
+      </div>
+  </div>
+
+@{
+    string brand = "";
+}
+@foreach (var x in Model.ProductList)
+{      
+    
+    if(x.Brand != brand)
+    {
+        <div class="brand_title">@x.Brand</div>
+        brand = x.Brand;
+    }
+
+    <div class="item_container">
+		<div class="col_container" style="width:150px;">					
+			<div>
+                <img class="item_image" src="@Model.BaseUrl/Nx/ProductController/Image?path=@x.Photo" alt="framworkstructure"/>
+            </div>
+		</div>		
+		
+		<div class="col_container" style="width:150px;">
+			<div class="vertical_stack item_code" >@x.Code</div>
+			<div class="vertical_stack" >@x.Brand</div>
+			<div class="vertical_stack" ><span class="item_price">@x.SellPrice 元</span></div>
+		</div>
+		
+		<div class="col_container" style="width:50%">
+			<div class="vertical_stack" >
+				<span class="item_name"  >@x.Name</span>				
+				<span ></span>
+			</div>
+				
+			<div class="vertical_stack" >
+				<span class="item_spc">规格 @x.Spec</span>
+				<span class="item_people">适用人群 @x.ApplicableCrowd</span>
+				<span class="item_tag">标签 @x.TagList</span>
+			</div>
+			<div class="vertical_stack" >
+			<span class="item_remark"> @x.Remark</span>
+			</div>
+		</div>
+		
+		<div class="col_container">
+			<div class="vertical_stack item_weight" >@x.GrossWeight g</div>
+
+		</div>
+
+    
+    </div>
+     
+}
+
+         
+
+       
+       

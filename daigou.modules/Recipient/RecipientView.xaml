@@ -1,0 +1,173 @@
+﻿<UserControl x:Class="daigou.modules.Recipient.RecipientView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:cal="http://www.codeplex.com/prism"
+             xmlns:Extenders="clr-namespace:daigou.infrastructure.Extenders;assembly=daigou.infrastructure"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="800" Loaded="UserControl_Loaded">
+    <Grid Background="#FFFFFF">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="400" />
+        </Grid.ColumnDefinitions>
+        <DockPanel>
+          
+            <Rectangle Height="2" Fill="Gray" DockPanel.Dock="Top"/>
+
+            <DockPanel DockPanel.Dock="Top" >
+                <Label  DockPanel.Dock="Left" Content="查找" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <CheckBox DockPanel.Dock="Right" Content="显示添加收件人" Name="cb_display_add_recipient" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="10"/>
+                <Button DockPanel.Dock="Right" Content="清除"  Margin="10px" Width="100px" VerticalContentAlignment="Center" VerticalAlignment="Center" Command="{Binding CleanFilterTxtCommand}"/>
+                <TextBox Text="{Binding FilterTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Style="{StaticResource TB_NoBorder}" ></TextBox>
+            </DockPanel>
+
+            <Rectangle Height="2" Fill="Gray" DockPanel.Dock="Top"/>
+
+
+            <ContentControl DockPanel.Dock="Top" Name="RecipientAddRegion" cal:RegionManager.RegionName="RecipientAddRegion" Visibility="{Binding ElementName=cb_display_add_recipient, Path=IsChecked,Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+           
+
+            <ListView  ItemTemplate="{StaticResource  RecipientListTemplate}" ItemsSource="{Binding RecipientCollectionView}" HorizontalAlignment="Stretch" Name="listView1" VerticalAlignment="Stretch"  BorderBrush="{x:Null}" 
+                   SelectedItem="{Binding SelectedItem}" IsSynchronizedWithCurrentItem="True"
+                       HorizontalContentAlignment="Stretch"
+                       Extenders:ListViewExtender.AutoScrollToCurrentItem="True">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+            
+            
+        </DockPanel>
+        
+        <ScrollViewer Grid.Column="1" Margin="10">
+        <StackPanel>
+                <Expander Header="打印中文地址标签" Background="#1C32CD32" >
+                    <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label  DockPanel.Dock="Left" Content="重量" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding CnLabelKgValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource TB_NoBorder}" Width="30"></TextBox>
+                        <Label  DockPanel.Dock="Left" Content="KG" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label  DockPanel.Dock="Left" Content="备注" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                            <TextBox Text="{Binding RemarkTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource TB_NoBorder}" MinWidth="160"></TextBox>
+                    </StackPanel>
+            
+                     <Button Margin="10" Background="#697CA36D"  Content="打印中文地址标签"  VerticalContentAlignment="Center" VerticalAlignment="Center" Command="{Binding PrintCNAddressLabelCommand}" Height="60" />
+                    </StackPanel>
+                </Expander>
+            
+                <Expander Header="增加到新订单" IsExpanded="True" Background="#37FFFFAA" IsManipulationEnabled="False" Foreground="Black">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="报关信息 [商品名] [个数] [净重] [单价]" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                            <Button Content="清空" VerticalAlignment="Center"  Command="{Binding CleanCommand}"  Height="20"   Background="YellowGreen" MinWidth="70" Width="144" />
+                        </StackPanel>
+                        <TextBox Style="{StaticResource TB_NoBorder}" Text="{Binding DeclarationInfo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinHeight="50" FontSize="13" Foreground="DarkBlue" AcceptsReturn="True" TextWrapping="Wrap" Height="113"></TextBox>
+                        <WrapPanel>
+                            <Button Content="7kg" VerticalAlignment="Center"  Command="{Binding AddOrderWeightCommand}" CommandParameter="{Binding Content,RelativeSource={RelativeSource Self}}" Height="30"  Margin="5" Background="YellowGreen" MinWidth="70"/>
+                            <Button Content="8kg" VerticalAlignment="Center"  Command="{Binding AddOrderWeightCommand}" CommandParameter="{Binding Content,RelativeSource={RelativeSource Self}}" Height="30"  Margin="5" Background="MintCream" MinWidth="70"/>
+                            <Button Content="9kg" VerticalAlignment="Center"  Command="{Binding AddOrderWeightCommand}" CommandParameter="{Binding Content,RelativeSource={RelativeSource Self}}" Height="30"  Margin="5" Background="#9B7B68EE" MinWidth="70"/>
+                            <Button Content="10kg" VerticalAlignment="Center" Command="{Binding AddOrderWeightCommand}" CommandParameter="{Binding Content,RelativeSource={RelativeSource Self}}" Height="30" Margin="5" Background="#9B7FFFD4" MinWidth="70"/>
+                        </WrapPanel>
+
+                        <WrapPanel>
+                            <Button Content="6X" VerticalAlignment="Center"  Command="{Binding AddOrderDetailsCommand}" CommandParameter="milk.powder 6 0.8 12" Height="30"  Margin="2" Background="SkyBlue" MinWidth="50"/>
+                            <Button Content="8X" VerticalAlignment="Center"  Command="{Binding AddOrderDetailsCommand}" CommandParameter="milk.powder 8 0.6 10" Height="30"  Margin="2" Background="#9B8B0000" MinWidth="50"/>
+
+
+                            <Button Content="food" VerticalAlignment="Center"  Command="{Binding AddOrderDetailsCommand}" CommandParameter="baby.food 6 0.5 3" Height="30"  Margin="2" Background="LavenderBlush" Padding="3 0"/>
+                            <Button Content="vit" VerticalAlignment="Center"  Command="{Binding AddOrderDetailsCommand}" CommandParameter="baby.vitamin 2 0.3 5" Height="30"  Margin="2" Background="LavenderBlush"  Padding="3 0"/>
+                            <Button Content="filter" VerticalAlignment="Center"  Command="{Binding AddOrderDetailsCommand}" CommandParameter="Water.filter 1 3 30" Height="30"  Margin="2" Background="LavenderBlush"  Padding="3 0"/>
+                            <Button Content="napkin" VerticalAlignment="Center"  Command="{Binding AddOrderDetailsCommand}" CommandParameter="Sanitary.napkins 2 0.3 2" Height="30"  Margin="2" Background="LavenderBlush" Padding="3 0"/>
+                            <Button Content="daily" VerticalAlignment="Center"  Command="{Binding AddOrderDetailsCommand}" CommandParameter="Daily.necessities 12 0.8 3" Height="30"  Margin="2" Background="LavenderBlush"  Padding="3 0"/>
+                            <Button Content="seat" VerticalAlignment="Center"  Command="{Binding AddOrderDetailsCommand}" CommandParameter="CarSafetySeat 1 16 110" Height="30"  Margin="2" Background="LavenderBlush"  Padding="3 0"/>
+
+
+
+                        </WrapPanel>
+
+                        <WrapPanel>
+                            <Label Content="订单内容" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                            <Button Content="[拍照]" VerticalAlignment="Center"  Command="{Binding AddPhotoCommand}"  Height="25"  Margin="5" Background="Wheat" MinWidth="70"/>
+                            <Button Content="[印章]" VerticalAlignment="Center"  Command="{Binding AddStampCommand}"  Height="25"  Margin="5" Background="Wheat" MinWidth="70"/>
+                        </WrapPanel>
+                        <ComboBox  FontSize="20"  Margin="5" ItemsSource="{Binding Path=OrderExampleList}" SelectedValue="{Binding Path=SelectedOrderInfo}"  SelectedValuePath="Content">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <Rectangle Fill="{Binding Color}" Width="16" Height="16" Margin="0,2,5,2" />
+                                        <TextBlock Text="{Binding Content}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                            
+                        </ComboBox>
+                        <TextBox Style="{StaticResource TB_NoBorder}" Text="{Binding OrderInfo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinHeight="50" FontSize="20" Foreground="DarkBlue" AcceptsReturn="True" TextWrapping="Wrap" Height="60"></TextBox>
+                        <Button  Content="添加到新订单" Name="BtnAddNewOrder" VerticalAlignment="Center" Command="{Binding AddToNewOrderCommand}" Height="36" Margin="10" Background="#821E90FF" />
+                    </StackPanel>
+                </Expander>
+            
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button  Content="复制信息" Margin="10"  Height="25" Background="CornflowerBlue" Name="BtnCopyRecipientInfo" VerticalAlignment="Center" Command="{Binding CopyRecipientInfoCommand}" HorizontalAlignment="Stretch"/>                        
+                        <ComboBox   Margin="10" ItemsSource="{Binding Path=AgentList}" Width="150" SelectedValue="{Binding Path=SelectedAgent}" DisplayMemberPath="Name"></ComboBox>
+                        <Button  Content=" 保存 "  Margin="10" Width="60px" Height="25" Background="LightGreen" Name="BtnSave" VerticalAlignment="Top" Command="{Binding SaveRecipientChangeCommand}" CommandParameter="{Binding Path=SelectedItem, ElementName=listView1}"  />
+                    </StackPanel>
+                   <Label   Content="{Binding ErrorMsg}" HorizontalAlignment="Stretch" VerticalAlignment="Top" IsEnabled="True" Foreground="#FFF51010" ForceCursor="False" FontWeight="Black" FontFamily="Microsoft YaHei" HorizontalContentAlignment="Center" />
+                    <StackPanel Orientation="Horizontal">
+                        <Label   Content="姓名" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                        <Label   Content="{Binding Path=SelectedItem.PinyinName, ElementName=listView1,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFCB0A0A" FontFamily="Microsoft YaHei" FontWeight="Black" />
+                    </StackPanel>
+                    <TextBox Text="{Binding Path=SelectedItem.Name, ElementName=listView1,UpdateSourceTrigger=PropertyChanged}"
+                         Foreground="{Binding Path=SelectedItem.ID, ElementName=listView1, Converter={StaticResource RecipientIDToColorConverter}}"
+                         FontSize="50"  Style="{StaticResource TB_NoBorder}"></TextBox>
+                    
+            </StackPanel>
+            
+            <StackPanel>
+                <Label   Content="{Binding Path=SelectedItem.CnAddress,Converter={StaticResource AddressSeperatorCounterConverter}}" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <TextBox  Text="{Binding Path=SelectedItem.CnAddress, ElementName=listView1,UpdateSourceTrigger=PropertyChanged}" FontSize="20"  Style="{StaticResource TB_NoBorder}"></TextBox>
+
+                <Label   Content="备注" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <TextBox  Text="{Binding Path=SelectedItem.Remark, ElementName=listView1,UpdateSourceTrigger=PropertyChanged}" FontSize="20"  Style="{StaticResource TB_NoBorder}"></TextBox>
+
+
+                 <Label   Content="主要电话" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <TextBox  Text="{Binding Path=SelectedItem.MainTel, ElementName=listView1,UpdateSourceTrigger=PropertyChanged}" FontSize="20"  Style="{StaticResource TB_NoBorder}"></TextBox>
+
+                <Label   Content="其它电话" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <TextBox  Text="{Binding Path=SelectedItem.OtherTels, ElementName=listView1,UpdateSourceTrigger=PropertyChanged}" FontSize="20"  Style="{StaticResource TB_NoBorder}"></TextBox>
+
+
+                <Label   Content="QQ" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <TextBox  Text="{Binding Path=SelectedItem.QQNumber, ElementName=listView1,UpdateSourceTrigger=PropertyChanged}" FontSize="20"  Style="{StaticResource TB_NoBorder}"></TextBox>
+
+                    <Label   Content="AgentName" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <TextBox  Text="{Binding Path=SelectedItem.AgentName, ElementName=listView1,UpdateSourceTrigger=PropertyChanged}" FontSize="20"  Style="{StaticResource TB_NoBorder}"></TextBox>
+
+                    <Label   Content="邮编" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <TextBox  Text="{Binding Path=SelectedItem.PostCode, ElementName=listView1,UpdateSourceTrigger=PropertyChanged}" FontSize="20"   Style="{StaticResource TB_NoBorder}"></TextBox>
+
+                <Label   Content="省市" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <TextBox   Text="{Binding Path=SelectedItem.ProviceCity, ElementName=listView1,UpdateSourceTrigger=PropertyChanged}" FontSize="20"   Style="{StaticResource TB_NoBorder}"></TextBox>          
+             </StackPanel>
+
+             <StackPanel Orientation="Horizontal">                
+                <Button  Content="Delete" Margin="10px"   Name="BtnDelete" VerticalAlignment="Top" Command="{Binding RemoveRecipientCommand}" CommandParameter="{Binding Path=SelectedItem.ID, ElementName=listView1}"  />
+            </StackPanel>
+            
+            <StackPanel>
+                
+            </StackPanel>
+                    
+          </StackPanel>
+            
+        </ScrollViewer>
+    </Grid>
+</UserControl>

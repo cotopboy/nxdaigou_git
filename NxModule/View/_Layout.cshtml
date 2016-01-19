@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Cbb Demo Web-Framework</title>
+<meta name="keywords" content="cbb demo" />
+<meta name="description" content="This is a cbb self-host demo web framework" />
+<meta name="application-name" content="Cbb Demo Web Framework" />
+<meta name="msapplication-tooltip" content="Cbb Demo Web Framework" />
+
+<link rel="stylesheet" href="@Model.BaseUrl/Nx/Bundle/CommonCssBundle?v=@Model.ModuleEtag" type="text/css" media="screen" /> 
+<script type='text/javascript' src='@Model.BaseUrl/Nx/Bundle/CommonJsBundle?v=@Model.ModuleEtag'></script>
+@if (IsSectionDefined("HeaderCss")) { @RenderSection("HeaderCss")}
+@if (IsSectionDefined("HeaderJs")) { @RenderSection("HeaderJs")}
+<script type="text/javascript">
+    var _base_url = "@Model.BaseUrl";
+</script>
+</head> 
+<body> 
+
+
+    <div class="container">
+    @RenderBody()
+    </div>
+
+    <div class="container">
+    @if (IsSectionDefined("BodyCss")) { @RenderSection("BodyCss")}
+    </div>
+
+    <br/><br/><br/><br/><br/>
+
+    <hr/>
+  
+
+      
+
+</body> 
+</html>
