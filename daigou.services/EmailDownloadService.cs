@@ -30,9 +30,9 @@ namespace daigou.services
             this.directoryService = directoryService;
             this.configurationService = configurationService;
             this.savePath = directoryService.BaseDir;
-            this.emailAccount = "nxdaigou@gmail.com";
-            this.password = "980203root";
-
+            
+            this.emailAccount = configurationService.ConfigDict["nxdaigougmail"];
+            this.password = configurationService.ConfigDict["nxdaigougmailpassword"];
         }
 
         public void StartDownload()

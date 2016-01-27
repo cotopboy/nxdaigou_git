@@ -74,7 +74,7 @@
                 <CheckBox DockPanel.Dock="Left" IsChecked="{Binding IsSelected}" VerticalAlignment="Center" Margin="5 0 0 0 " >
                     <CheckBox.Content>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock DockPanel.Dock="Left" Text="{Binding Order.ID}" Width="30"  VerticalAlignment="Center" Margin="5 0 0 0 " />
+                            <TextBlock DockPanel.Dock="Left" Text="{Binding Order.ID}"  VerticalAlignment="Center" Margin="5 0 0 0 " />
                         </StackPanel>
                     </CheckBox.Content>
                 </CheckBox>

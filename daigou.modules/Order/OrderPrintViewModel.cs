@@ -59,6 +59,36 @@ namespace daigou.modules.Order
             }
         }
 
+        public DelegateCommand PDFRenameCommand
+        {
+            get             
+            {
+                return new DelegateCommand(() => 
+                {
+                    CorrectAndRenamePdfFile();
+                });
+            }
+        }
+
+        private void CorrectAndRenamePdfFile()
+        {
+            DirectoryInfo dirInfo = new DirectoryInfo(this.directoryService.BaseDir);
+
+            var files = dirInfo.GetFiles("*.pdf");
+
+
+            foreach (var item in files)
+            {
+                string newname = item.FullName.Replace('·', '`');
+
+                if (RenameChar.Length > 0)
+                    newname = newname.Replace(renameChar, "`");
+
+                item.MoveTo(newname);                                              
+            }
+
+        }
+
         private void DonwLoadEmailAttachment()
         {
             do
@@ -105,6 +135,13 @@ namespace daigou.modules.Order
                         AnalyseDirectory();
                     });
             }
+        }
+
+        private string renameChar;
+        public string RenameChar
+        {
+            get { return renameChar; }
+            set { renameChar = value; RaisePropertyChanged("RenameChar"); }
         }
 
         public string DlogDirectory

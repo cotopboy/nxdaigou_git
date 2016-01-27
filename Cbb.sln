@@ -31,45 +31,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NxModule", "NxModule\NxModule.csproj", "{A75920A3-8340-49D0-85DD-13C233E1997D}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 12
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs20
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = daigou.main\\daigou.main.csproj
-		SccProjectName1 = daigou.main
-		SccLocalPath1 = daigou.main
-		SccProjectUniqueName2 = daigou.modules\\daigou.modules.csproj
-		SccProjectName2 = daigou.modules
-		SccLocalPath2 = daigou.modules
-		SccProjectUniqueName3 = daigou.infrastructure\\daigou.infrastructure.csproj
-		SccProjectName3 = daigou.infrastructure
-		SccLocalPath3 = daigou.infrastructure
-		SccProjectUniqueName4 = daigou.services\\daigou.services.csproj
-		SccProjectName4 = daigou.services
-		SccLocalPath4 = daigou.services
-		SccProjectUniqueName5 = daigou.services.test\\daigou.services.test.csproj
-		SccProjectName5 = daigou.services.test
-		SccLocalPath5 = daigou.services.test
-		SccProjectUniqueName6 = daigou.dal\\daigou.dal.csproj
-		SccProjectName6 = daigou.dal
-		SccLocalPath6 = daigou.dal
-		SccProjectUniqueName7 = daigou.domain\\daigou.domain.csproj
-		SccProjectName7 = daigou.domain
-		SccLocalPath7 = daigou.domain
-		SccProjectUniqueName8 = daigou.waybill.query\\daigou.waybill.query.csproj
-		SccProjectName8 = daigou.waybill.query
-		SccLocalPath8 = daigou.waybill.query
-		SccProjectUniqueName9 = Converter\\Converter.csproj
-		SccProjectName9 = Converter
-		SccLocalPath9 = Converter
-		SccProjectUniqueName10 = daigou.web\\daigou.web.csproj
-		SccProjectName10 = daigou.web
-		SccLocalPath10 = daigou.web
-		SccProjectUniqueName11 = NxModule\\NxModule.csproj
-		SccProjectName11 = NxModule
-		SccLocalPath11 = NxModule
-	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = daigou.vsmdi
 	EndGlobalSection
