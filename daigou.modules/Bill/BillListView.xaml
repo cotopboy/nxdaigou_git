@@ -85,9 +85,13 @@
             </StackPanel>
 
 
+            <StackPanel Grid.Row="1" Grid.Column="9" >
+                <Button Content="复制支付信息" VerticalAlignment="Center"   Height="26"  Margin="2" Background="Gold" Command="{Binding CopyPayInformationCommand}"/>
+            </StackPanel>
+            
             <StackPanel Grid.Row="1" Grid.Column="11" >
                 
-                <Button Content="删除选中" VerticalAlignment="Center" Command="{Binding DeleteCommand}" Height="20" Margin="2" Background="OrangeRed" />
+            <Button Content="删除选中" VerticalAlignment="Center" Command="{Binding DeleteCommand}" Height="20" Margin="2" Background="OrangeRed" />
             </StackPanel>
 
         </Grid>        

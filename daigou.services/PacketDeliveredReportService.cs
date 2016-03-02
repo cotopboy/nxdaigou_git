@@ -108,12 +108,16 @@ namespace daigou.services
                     }
                     else
                     {
+                        string baiduLink = "http://www.baidu.com/s?wd={0}".FormatAs(emsSn);
                         msg.AppendLine();
                         msg.AppendLine("<b>中国EMS,转单号:</b> {0}".FormatAs(emsSn));
                         msg.AppendLine("<br/>");
-                        msg.AppendLine("<b>可以通过中国EMS网站进行更进一步的查询：</b> http://www.ems.com.cn");
+                        msg.AppendLine("<b>通过中国EMS网站进行更进一步的查询：</b> http://www.ems.com.cn");
                         msg.AppendLine("<br/>");
-                        msg.AppendLine("<b>EMS全国统一服务电话: </b> 11183");
+                        msg.AppendLine("<b>通过百度查询：</b>");
+                        msg.AppendLine("<a href=\"{0}\">{0}</a>".FormatAs(baiduLink));
+                        msg.AppendLine("<br/>");
+                        msg.AppendLine("<b>通过EMS全国统一服务电话查询: </b> 11183");
                         msg.AppendLine("<br/>");
                     }
 

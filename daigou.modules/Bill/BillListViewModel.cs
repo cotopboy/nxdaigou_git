@@ -19,6 +19,8 @@ using daigou.modules.Product.Events;
 using System.Windows;
 using daigou.infrastructure.Events;
 using daigou.modules.Command;
+using System.IO;
+using Utilities.IO;
 
 
 namespace daigou.modules.Bill
@@ -106,6 +108,28 @@ namespace daigou.modules.Bill
                         BillList.Where(x => x.IsSelected).ForEach(x => x.DomainBill.CreatedTime = DateTime.Now);
                         billService.Save();
                     });
+            }
+        }
+
+
+        public DelegateCommand CopyPayInformationCommand
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    try
+                    {
+                        string path = DirectoryHelper.CombineWithCurrentExeDir("paid_info.txt");
+
+                        FileInfo file = new FileInfo(path);
+
+                        var content = file.Read();
+
+                        Clipboard.SetText(content);
+                    }
+                    catch { }
+                });
             }
         }
 
