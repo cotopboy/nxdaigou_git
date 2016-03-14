@@ -120,9 +120,9 @@ namespace daigou.services
             string line2 = string.Format("地址:{0}", recipient.CnAddress);
 
             string greetingLineCn  = "亲爱的海关工作人员，国际包裹工作人员 还有 快递师傅们，您们辛苦了！";
-            string greetingLineCn2 = "这是寄给我们家亲戚宝宝的日常用品，可怜天下父母心，恳请您在第一时间帮我们顺利派送。";
-            string greetingLineCn3 = "万分感谢了~！谢谢~！！谢谢~！！谢谢~！！";
-            string greetingLineCn4 = "包裹发自德国吕贝克23560 RuifengZhang";
+            string greetingLineCn2 = "恳请您在第一时间帮我们顺利派送。";
+            string greetingLineCn3 = "万分感谢了~！ + (谢谢！) X (无限次)";
+            string greetingLineCn4 = "德国吕贝克 RF,Zhang";
 
             const int emSize = 9;
             // Set font encoding to unicode
