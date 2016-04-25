@@ -105,6 +105,7 @@
     <Compile Include="EmailDownloadService.cs" />
     <Compile Include="EmailSender.cs" />
     <Compile Include="EMSLocalBarcodeService.cs" />
+    <Compile Include="EMS\EmsExcelBuilder.cs" />
     <Compile Include="Interfaces\IDhlWaybillEmailBuilder.cs" />
     <Compile Include="Interfaces\IDhlWaybillExcelBuilder.cs" />
     <Compile Include="Interfaces\IWaybillInfoExtractor.cs" />
@@ -156,6 +157,7 @@
   <ItemGroup>
     <None Include="Resources\Buisness_Invoice_Template.xls" />
     <None Include="Resources\CX_Template.xls" />
+    <None Include="Resources\EMS_Template.xls" />
     <None Include="Resources\ZD_Bpost_Template.xls" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -16,6 +16,11 @@ namespace daigou.services
         public string NetWeight { get; set; }
         public string Value { get; set; }
 
+        public float FloatNetWeight
+        {
+            get { return GetFloatValue(NetWeight); }
+        }
+
         public float IntQuantity
         {
             get { return GetFloatValue(Quantity); }
