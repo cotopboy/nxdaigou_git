@@ -41,7 +41,7 @@ namespace daigou.services.EMS
            this.randomNameService = randomNameService;
         }
 
-        public string Generate(string targetDir, List<DhlWaybillParam> dhlWaybillParamList)
+        public string Generate(string targetDir, List<DhlWaybillParam> dhlWaybillParamList,string taobaoOrderSn = "")
         {
             string ExcelFile = this.resourceReleaser.ReleaseXls("EMS_Template", targetDir);
 
@@ -57,7 +57,7 @@ namespace daigou.services.EMS
 
             foreach (var info_xls_Pre in dhlWaybillParamList)
             {
-                FillXlWorkSheet(xlWorkSheet, realRowIndex, info_xls_Pre);
+                FillXlWorkSheet(xlWorkSheet, realRowIndex, info_xls_Pre,taobaoOrderSn);
 
                 if (OnReportStep != null)
                 {
@@ -88,7 +88,7 @@ namespace daigou.services.EMS
             return string.Format("EMS_{0}_{1}.xls", this.modeInfo.WanwanName, DateTime.Now.ToString("MM.dd"));
         }
 
-        private void FillXlWorkSheet(Excel.Worksheet xlWorkSheet, int realRowIndex, DhlWaybillParam param)
+        private void FillXlWorkSheet(Excel.Worksheet xlWorkSheet, int realRowIndex, DhlWaybillParam param, string taobaoOrderSn )
         {
 
             xlWorkSheet.Cells[realRowIndex, ToIndex("A")] = "EMS";
@@ -96,7 +96,7 @@ namespace daigou.services.EMS
 
             xlWorkSheet.Cells[realRowIndex, ToIndex("C")] = this.modeInfo.WanwanName;
 
-            xlWorkSheet.Cells[realRowIndex, ToIndex("D")] = ""; // order id from taobao.
+            xlWorkSheet.Cells[realRowIndex, ToIndex("D")] = taobaoOrderSn; 
 
             xlWorkSheet.Cells[realRowIndex, ToIndex("E")] = "nxdaigou@gmail.com";
 

@@ -25,7 +25,7 @@ namespace daigou.services
         }
 
 
-        public string Generate( string targetDir,List<DhlWaybillParam> dhlWaybillParamList)
+        public string Generate(string targetDir, List<DhlWaybillParam> dhlWaybillParamList, string taobaoOrderSn = "")
         {
             string ExcelFile = this.resourceReleaser.ReleaseXls("CX_Template", targetDir);
 

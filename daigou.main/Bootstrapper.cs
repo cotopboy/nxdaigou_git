@@ -53,8 +53,9 @@ namespace daigou.main
             RegisterTypeIfMissing(typeof(IManualAddressLineCounter), typeof(ManualAddressCounterDialog), false);
             RegisterTypeIfMissing(typeof(FileDBMgr), typeof(FileDBMgr), true);
             
-            this.Container.RegisterInstance(new AppStatusManager(DirectoryHelper.CombineWithCurrentExeDir("settting"))); 
+            this.Container.RegisterInstance(new AppStatusManager(DirectoryHelper.CombineWithCurrentExeDir("settting")));
 
+            this.Container.RegisterInstance(new GlobalSetting());
 
             App.container = this.Container;
         }

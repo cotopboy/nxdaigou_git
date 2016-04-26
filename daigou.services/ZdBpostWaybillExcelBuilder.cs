@@ -33,7 +33,7 @@ namespace daigou.services
            this.randomNameService = randomNameService;
         }
 
-        public string Generate(string targetDir, List<DhlWaybillParam> dhlWaybillParamList)
+        public string Generate(string targetDir, List<DhlWaybillParam> dhlWaybillParamList, string taobaoOrderSn = "")
         {
             string ExcelFile = this.resourceReleaser.ReleaseXls("ZD_Bpost_Template", targetDir);
 

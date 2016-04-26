@@ -57,6 +57,7 @@
     <Compile Include="Base\CnParserBaseClass.cs" />
     <Compile Include="Bill.cs" />
     <Compile Include="Configuration.cs" />
+    <Compile Include="GlobalSetting.cs" />
     <Compile Include="Repository\BillRepository.cs" />
     <Compile Include="Repository\ConfigurationRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
