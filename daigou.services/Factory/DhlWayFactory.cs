@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 using Microsoft.Practices.Unity;
+using daigou.services.EMS;
 
 namespace daigou.services
 {
@@ -34,7 +35,8 @@ namespace daigou.services
                 return this.container.Resolve<CxDhlWaybillEmailBuilder>("CxDhlWaybillEmailBuilder");
             else if (type.Name == "中德快递Bpost")
                 return this.container.Resolve<ZdBpostWaybillEmailBuilder>(new ParameterOverride("modeInfo", type));
-
+            else if (type.Name == "EMS")
+                return this.container.Resolve<EMSApplyEmailBuilder>(new ParameterOverride("modeInfo", type));
             if (type.Type == "下家客户")
                 return this.container.Resolve<ZdBpostWaybillEmailBuilderToClient>(new ParameterOverride("modeInfo", type));
             
@@ -56,6 +58,8 @@ namespace daigou.services
                  return this.container.Resolve<CxDhlWaybillExcelBuilder>("CxDhlWaybillExcelBuilder");
              else if (type.Name == "中德快递Bpost")
                  return this.container.Resolve<ZdBpostWaybillExcelBuilder>(new ParameterOverride("modeInfo", type));
+             else if (type.Name == "EMS")
+                 return this.container.Resolve<EmsExcelBuilder>(new ParameterOverride("modeInfo", type));
 
              else if (type.Type == "下家客户")
                  return this.container.Resolve<ZdBpostWaybillExcelBuilder>(new ParameterOverride("modeInfo", type));

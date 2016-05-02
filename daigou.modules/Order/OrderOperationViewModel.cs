@@ -21,6 +21,7 @@ using daigou.infrastructure;
 using System.Diagnostics;
 using Utilities.WinAPI;
 using System.Windows.Threading;
+using daigou.services.Factory;
 
 namespace daigou.modules.Order
 {
@@ -60,7 +61,8 @@ namespace daigou.modules.Order
         private OrderService orderService;
         private RecipientService recipientService;
         private IRegionManager manager;
-        private PacketDeliveredReportService PacketDeliveredReportService;
+        
+        private PacketDeliveredReportFactory packetDeliveredReportFactory;
         private WaybillQueryManager SearchManager;
         private ProcessModeInfoProvider ProcessModeInfoProvider;
         private List<ProcessModeInfo> ModeList;
@@ -72,7 +74,7 @@ namespace daigou.modules.Order
             DhlWaybillService dhlWaybillService,
             CnRecipientLabelBuilder cnRecipientLabelBuilder,
             IRegionManager manager,
-            PacketDeliveredReportService PacketDeliveredReportService,
+            PacketDeliveredReportFactory packetDeliveredReportFactory,
             WaybillQueryManager SearchManager,
             DirectoryService directoryService,
             ProcessModeInfoProvider ProcessModeInfoProvider
@@ -87,7 +89,7 @@ namespace daigou.modules.Order
             this.dhlWaybillService = dhlWaybillService;
             this.cnRecipientLabelBuilder = cnRecipientLabelBuilder;
             this.directoryService = directoryService;
-            this.PacketDeliveredReportService = PacketDeliveredReportService;
+            this.packetDeliveredReportFactory = packetDeliveredReportFactory;
             this.loadOrderListCommand = new DelegateCommand(LoadOrderList);
             this.saveOrderCommand = new DelegateCommand(SaveOrder);
             this.cleanFilterTxtCommand = new DelegateCommand(CleanFilterTxt);
@@ -437,26 +439,14 @@ namespace daigou.modules.Order
 
             foreach (var item in list)
             {
-                var array = item.Order.DhlSn.Split(';');
-
-                string dhl = (array.Length >= 1) ? array[0] : "";
-                string bpost = (array.Length >= 2) ? array[1] : "";
-                string ems = (array.Length >= 3) ? array[2] : "";
-                string emsQuery = "";                
-                if (ems.IsNullOrEmpty())
+                var reporter = this.packetDeliveredReportFactory.CreateBuilder(item.Order.LogisticsType);
+                if (reporter != null)
                 {
-                    emsQuery = this.SearchManager.GetEMSCodeByBpostCode(bpost);
+                    reporter.ReportPacketSentByEmail(item, item.Order.EmailRemark);
+                    SetOrderSent(item.Order);
                 }
-
-                if (ems.IsNullOrEmpty() && !emsQuery.IsNullOrEmpty())
-                {
-                    item.Order.DhlSn += ";" + emsQuery;
-                    this.orderService.Save(item.Order);
-                }
-                SetOrderSent(item.Order);
             }
-
-            this.PacketDeliveredReportService.ReportPacketSentByEmail(list,this.EmailAdditionalInfo);
+            
             this.IsUIEnable = true;
             WinAPI.MessageBeep(WinAPI.BeepType.SimpleBeep);
         }
@@ -738,10 +728,10 @@ namespace daigou.modules.Order
                     {
                         Recipient = x.Recipient,
                         Order = x.Order,
-                        NameIndex = x.NameIndex
+                        NameSpecifier = x.NameSpecifier
                     }).ToList();
 
-                this.dhlWaybillService.PrintProcessWaybill(list, this.SelectedDHLAgent.Name);
+                this.dhlWaybillService.PrintProcessWaybill(list);
 
                 list.ForEach(x => this.orderService.Save(x.Order));
 
@@ -776,8 +766,9 @@ namespace daigou.modules.Order
             {
                 if (!item.Order.OrderStatusTags.Contains("applied"))
                 {
-                    item.Order.OrderStatusTags += "applied";
+                    item.Order.OrderStatusTags += "applied";                    
                 }
+                item.Order.LogisticsType = this.SelectedDHLAgent.Name;
             }
 
             do

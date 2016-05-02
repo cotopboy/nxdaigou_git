@@ -45,10 +45,6 @@ namespace daigou.services
                 PrintRecipientWayBill(item);
             }
 
-            string folderName = DateTime.Now.ToString("yyyy_MM_dd") + "_" + string.Join("_", list.Select(x => x.Recipient.Name));
-            string folderPath = Path.Combine(this.directoryService.GetOrCreateBaseDir(), folderName);
-            if (!Directory.Exists(folderPath)) Directory.CreateDirectory(folderPath);
-
         }
 
         private void PrintRecipientWayBill(PrintWayBillParam param)
@@ -56,10 +52,8 @@ namespace daigou.services
 
             domain.Recipient recipient = param.Recipient;
             domain.Order order = param.Order;
-            
-            this.zdBpostWaybillAnalyser.TryCorrectFileName();
 
-            List<string> recipientPdfFileList = this.zdBpostWaybillAnalyser.GetRecipientPdfFileList(recipient,param.NameIndex);
+            List<string> recipientPdfFileList = this.zdBpostWaybillAnalyser.GetRecipientPdfFileList(recipient,(uint)param.NameSpecifier.StrToInt());
             
             foreach (var fileName in recipientPdfFileList)
             {
@@ -97,7 +91,7 @@ namespace daigou.services
             }
 
             // Save the document...
-            string filename = recipient.Name + order.ID.ToString() + "运单.pdf";
+            string filename = recipient.Name + order.ID.ToString() + "_BPOST_运单.pdf";
             string outputDocFullname = Path.Combine(this.directoryService.GetOrCreateBaseDir(), filename);
             outputDocument.Save(outputDocFullname);
 
@@ -215,7 +209,7 @@ namespace daigou.services
 
         private static bool IsDhlWaybill(string filename)
         {
-            return filename.Contains("`");
+            return filename.Contains("0");
         }
 
         private static bool IsBpostWaybillwithBarCode(string filename)
@@ -239,7 +233,7 @@ namespace daigou.services
 
         private int GetYAdjustValue(string fileName, ZdBpostAddressLineInfo lineinfo)
         {
-            bool isBpost = fileName.Contains("1") && !fileName.Contains("`");
+            bool isBpost = fileName.Contains("1") && !fileName.Contains("0");
 
             int adjustValue = 0;
 

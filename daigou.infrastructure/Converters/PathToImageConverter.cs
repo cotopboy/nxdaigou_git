@@ -16,7 +16,7 @@ namespace daigou.infrastructure.Converters
 
     public class PathToImageConverter : IValueConverter
     {
-        private static BitmapImage defaultImage = new BitmapImage(new Uri(DirectoryHelper.CombineWithCurrentExeDir("images/default.png")));
+        private static BitmapImage defaultImage = new BitmapImage();
 
         private static Uri baseUri = new Uri(DirectoryHelper.CurrentExeDirectory);
 

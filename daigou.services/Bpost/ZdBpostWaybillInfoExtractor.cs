@@ -64,15 +64,12 @@ namespace daigou.services
 
         private void ExtractWaybillInfo(PrintWayBillParam param)
         {
-            
 
-            this.zdBpostWaybillAnalyser.TryCorrectFileName();
+            string dhlFileName = this.zdBpostWaybillAnalyser.GetDHLFile(param.Recipient,(uint)param.NameSpecifier.StrToInt());
 
-            string dhlFileName = this.zdBpostWaybillAnalyser.GetDHLFile(param.Recipient,param.NameIndex);
+            string bpostFileName = this.zdBpostWaybillAnalyser.GetBpostFile(param.Recipient, (uint)param.NameSpecifier.StrToInt());
 
-            string bpostFileName = this.zdBpostWaybillAnalyser.GetBpostFile(param.Recipient, param.NameIndex);
-
-            string bpostCN23FileName = this.zdBpostWaybillAnalyser.GetBpostCN23File(param.Recipient, param.NameIndex);
+            string bpostCN23FileName = this.zdBpostWaybillAnalyser.GetBpostCN23File(param.Recipient, (uint)param.NameSpecifier.StrToInt());
 
             string dhlContent = this.pdfTextExtractor.GetTextByCommandLine(dhlFileName);
 
@@ -85,7 +82,7 @@ namespace daigou.services
   
             param.Order.DhlSn = "{0};{1}".FormatAs(dhlWaybillSn, bpostWaybillsn);
 
-            nameToWaybillSnDict.Add(param.Recipient.Name + param.NameIndex, bpostWaybillsn);
+            nameToWaybillSnDict.Add(param.Recipient.Name + param.NameSpecifier, bpostWaybillsn);
 
         }
 

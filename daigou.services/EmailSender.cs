@@ -8,6 +8,7 @@ using daigou.domain;
 using Utilities.DataTypes.ExtensionMethods;
 using Utilities.IO.ExtensionMethods;
 using Utilities.Reflection.ExtensionMethods;
+using Utilities.Encryption.ExtensionMethods;
 using Utilities.IO;
 using System.Net;
 
@@ -94,10 +95,15 @@ namespace daigou.services
             msg.Priority = mailPriority;
 
 
-             
+            //"98.....r..t"
+           
+            byte[] a = "ODozMzIwc21sdQ==".FromBase64().Decrypt(new byte[] { 1, 2, 3 }, false);
+
+            var str = System.Text.Encoding.Default.GetString(a);
+
             var client = new SmtpClient("smtp.gmail.com", 587)
             {
-                Credentials = new NetworkCredential("nxdaigou@gmail.com", "980203root"),
+                Credentials = new NetworkCredential("nxdaigou@gmail.com", str),
                 EnableSsl = true
             };
             client.Send(msg);

@@ -39,7 +39,7 @@ namespace daigou.services
             {
                 if (item.Order.PacketWeight < 8) continue;
 
-                BuildSingleInvoice(item.Recipient, item.Order, NameToWaybillSn[item.Recipient.Name + item.NameIndex]);
+                BuildSingleInvoice(item.Recipient, item.Order, NameToWaybillSn[item.Recipient.Name + item.NameSpecifier]);
             }
         }
 

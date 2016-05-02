@@ -50,7 +50,7 @@ namespace daigou.services.EMS
             Excel.Worksheet xlWorkSheet;
             object misValue = System.Reflection.Missing.Value;
             xlApp = new Excel.Application();
-            int realRowIndex = 6;
+            int realRowIndex = 3;
 
             xlWorkBook = xlApp.Workbooks.Open(ExcelFile);
             xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
@@ -91,8 +91,10 @@ namespace daigou.services.EMS
         private void FillXlWorkSheet(Excel.Worksheet xlWorkSheet, int realRowIndex, DhlWaybillParam param, string taobaoOrderSn )
         {
 
+            double actualWeight = (param.Order.ActualWeight < 1) ? param.Order.PacketWeight * 0.95 : param.Order.ActualWeight;
+
             xlWorkSheet.Cells[realRowIndex, ToIndex("A")] = "EMS";
-            xlWorkSheet.Cells[realRowIndex, ToIndex("B")] = param.Order.PacketWeight;
+            xlWorkSheet.Cells[realRowIndex, ToIndex("B")] = Math.Round(actualWeight, 1);
 
             xlWorkSheet.Cells[realRowIndex, ToIndex("C")] = this.modeInfo.WanwanName;
 
@@ -112,7 +114,7 @@ namespace daigou.services.EMS
 
             xlWorkSheet.Cells[realRowIndex, ToIndex("K")] = "nxdaigou@gmail.com";
 
-            xlWorkSheet.Cells[realRowIndex, ToIndex("L")] = ""; // my phone. ignore
+            xlWorkSheet.Cells[realRowIndex, ToIndex("L")] = "017672886051";  
 
             FillItemDetail(xlWorkSheet, realRowIndex, param.Order.Detail);
 
@@ -122,11 +124,23 @@ namespace daigou.services.EMS
 
             xlWorkSheet.Cells[realRowIndex, ToIndex("AD")] = param.Recipient.PostCode;
 
-            xlWorkSheet.Cells[realRowIndex, ToIndex("AE")] = param.Recipient.ProviceCity; // todo get province.
-            xlWorkSheet.Cells[realRowIndex, ToIndex("AF")] = param.Recipient.ProviceCity; // todo get city.
+            xlWorkSheet.Cells[realRowIndex, ToIndex("AE")] = GetProvince(param.Recipient.ProviceCity);  
+            xlWorkSheet.Cells[realRowIndex, ToIndex("AF")] = GetCity(param.Recipient.ProviceCity);  
 
             xlWorkSheet.Cells[realRowIndex, ToIndex("AG")] = param.Recipient.CnAddress;
 
+        }
+
+        private string GetCity(string input)
+        {
+            if (input.Contains(",")) return input.SubStringAfter(",", 1);
+            else return input;
+        }
+
+        private string GetProvince(string input)
+        {
+            if (input.Contains(",")) return input.SubStringBefore(",");
+            else return "";
         }
 
         private float FillItemDetail(Excel.Worksheet xlWorkSheet, int realRowIndex, string inputDetail)
@@ -143,9 +157,9 @@ namespace daigou.services.EMS
                 var item = zbpostDetails.Items[i];
                 xlWorkSheet.Cells[realRowIndex, ToIndex(mapping[i][0])] = item.Content; 
                 xlWorkSheet.Cells[realRowIndex, ToIndex(mapping[i][1])] = item.IntQuantity;
-                xlWorkSheet.Cells[realRowIndex, ToIndex(mapping[i][2])] = item.FloatNetWeight * item.IntQuantity;
-                xlWorkSheet.Cells[realRowIndex, ToIndex(mapping[i][3])] = item.FloatNetWeight * item.IntQuantity * 1.1;
-                xlWorkSheet.Cells[realRowIndex, ToIndex(mapping[i][3])] = item.IntTotalValue / 8.0;
+                xlWorkSheet.Cells[realRowIndex, ToIndex(mapping[i][2])] = (item.FloatNetWeight * item.IntQuantity).ToString("F1");
+                xlWorkSheet.Cells[realRowIndex, ToIndex(mapping[i][3])] = (item.FloatNetWeight * item.IntQuantity * 1.1).ToString("F1");
+                xlWorkSheet.Cells[realRowIndex, ToIndex(mapping[i][4])] = (item.IntTotalValue).ToString("F1");
             }
 
             return (float)Math.Round(zbpostDetails.TotalValue, 2);

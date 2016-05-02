@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Practices.Unity;
+using daigou.services.EMS;
 
 
 namespace daigou.services
@@ -33,7 +34,9 @@ namespace daigou.services
             if (type == "诚信安全")
                 return null;
             else if (type == "中德快递Bpost")
-                return this.container.Resolve<ZdBpostWaybillPrinter>("ZdBpostWaybillPrinter");                
+                return this.container.Resolve<ZdBpostWaybillPrinter>("ZdBpostWaybillPrinter");
+            else if (type == "EMS")
+                return this.container.Resolve<EMSWayBillPrinter>("EMSWayBillPrinter"); 
             return null;
         }
     }
@@ -54,6 +57,8 @@ namespace daigou.services
                 return null;
             else if (type == "中德快递Bpost")
                 return this.container.Resolve<ZdBpostWaybillInfoExtractor>("ZdBpostWaybillInfoExtractor");
+            else if (type == "EMS")
+                return this.container.Resolve<EmsWaybillInfoExtractor>("EmsWaybillInfoExtractor");
             return null;
         }
     }

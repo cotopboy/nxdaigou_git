@@ -20,6 +20,21 @@ namespace daigou.domain
         private string _Remark = "";
         private string _EmailRemark = "";
         private string _OrderStatusTags = "";
+        private string _LogisticsType = "";
+
+        private double _ActualWeight = 0.0;
+
+        public double ActualWeight
+        {
+            get { return _ActualWeight; }
+            set { _ActualWeight = value; RaisePropertyChanged("ActualWeight"); }
+        }
+
+        public string LogisticsType
+        {
+            get { return _LogisticsType; }
+            set { _LogisticsType = value; RaisePropertyChanged("LogisticsType"); }
+        }
 
         public string OrderStatusTags
         {

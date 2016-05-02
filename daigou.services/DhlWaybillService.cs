@@ -52,7 +52,7 @@ namespace daigou.services
             string targetDir = this.directoryService.CreateDhlWaybillFolder(nameList);
             var excelBuilder = this.dhlWaybillExcelBuilderFactory.CreateBuilder(processMode);
 
-            string xlsFullPath = excelBuilder.Generate(targetDir, dhlWaybillParamList);
+            string xlsFullPath = excelBuilder.Generate(targetDir, dhlWaybillParamList, taobaoOrderSn);
 
 
             if (enableSendEmail == "true")
@@ -77,24 +77,33 @@ namespace daigou.services
         }
 
 
-        public void PrintProcessWaybill(List<PrintWayBillParam> list, string AgentType)
+        public void PrintProcessWaybill(List<PrintWayBillParam> rawlist)
         {
-            var extractor = this.waybillInfoExtractorFactory.CreateInfoExtractor(AgentType);
-            extractor.ExtractWaybillInfo(list);
 
+            List<string> agentTypeList = rawlist.Select(x => x.Order.LogisticsType).ToList().Distinct().ToList();
+
+            foreach (var agentType in agentTypeList)
+            {
+                List<PrintWayBillParam> list = rawlist.Where(x => x.Order.LogisticsType == agentType).ToList();
+
+                var extractor = this.waybillInfoExtractorFactory.CreateInfoExtractor(agentType);
+                extractor.ExtractWaybillInfo(list);
             
-
-            Dictionary<string, string> NameToWaybillSn = extractor.NameToWaybillSnDict;
-
-
-            var printer = this.waybillPrinterFactory.CreatePrinter(AgentType);
-            printer.PrintWayBill(list, extractor);
-
-            
-            this.businessInvoiceBuilder.BuildInvoice(list, NameToWaybillSn);
+                var printer = this.waybillPrinterFactory.CreatePrinter(agentType);
+                printer.PrintWayBill(list, extractor);
 
 
+                if (agentType == "中德快递Bpost")
+                {
+                    Dictionary<string, string> NameToWaybillSn = extractor.NameToWaybillSnDict;
+                    this.businessInvoiceBuilder.BuildInvoice(list, NameToWaybillSn);
+                }
+   
+            }
 
+            string folderName = DateTime.Now.ToString("yyyy_MM_dd") + "_" + string.Join("_", rawlist.Select(x => x.Recipient.Name));
+            string folderPath = Path.Combine(this.directoryService.GetOrCreateBaseDir(), folderName);
+            if (!Directory.Exists(folderPath)) Directory.CreateDirectory(folderPath);
         }
     }
 

@@ -16,6 +16,6 @@ namespace daigou.services
     {
         public Recipient Recipient { get; set; }
         public Order Order { get; set; }
-        public uint NameIndex { get; set; }
+        public string NameSpecifier { get; set; }
     }
 }

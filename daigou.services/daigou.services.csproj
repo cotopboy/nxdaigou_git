@@ -91,23 +91,31 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BpostAddressLineCounter.cs" />
-    <Compile Include="BusinessInvoiceBuilder.cs" />
-    <Compile Include="CnRecipientLabelBuilder.cs" />
+    <Compile Include="Bpost\BpostAddressLineCounter.cs" />
+    <Compile Include="Bpost\BpostPacketDeliveredReportService.cs" />
+    <Compile Include="Bpost\BusinessInvoiceBuilder.cs" />
+    <Compile Include="Bpost\CnRecipientLabelBuilder.cs" />
     <Compile Include="CnRecipientParser.cs" />
     <Compile Include="CompatiblePdfReader.cs" />
-    <Compile Include="CxDhlWaybillEmailBuilder.cs" />
-    <Compile Include="CxDhlWaybillExcelBuilder.cs" />
-    <Compile Include="DhlWayFactory.cs" />
+    <Compile Include="CxDhl\CxDhlWaybillEmailBuilder.cs" />
+    <Compile Include="CxDhl\CxDhlWaybillExcelBuilder.cs" />
+    <Compile Include="EMS\EmsPacketDeliveredReportService.cs" />
+    <Compile Include="Factory\DhlWayFactory.cs" />
     <Compile Include="DhlWaybillService.cs" />
     <Compile Include="DirectoryService.cs" />
     <Compile Include="DomainProductSrcriptExecuter.cs" />
     <Compile Include="EmailDownloadService.cs" />
     <Compile Include="EmailSender.cs" />
     <Compile Include="EMSLocalBarcodeService.cs" />
+    <Compile Include="EMS\EMSApplyEmailBuilder.cs" />
     <Compile Include="EMS\EmsExcelBuilder.cs" />
+    <Compile Include="EMS\EMSWaybillAnalyser.cs" />
+    <Compile Include="EMS\EmsWaybillInfoExtractor.cs" />
+    <Compile Include="EMS\EMSWayBillPrinter.cs" />
+    <Compile Include="Factory\PacketDeliveredReportFactory.cs" />
     <Compile Include="Interfaces\IDhlWaybillEmailBuilder.cs" />
     <Compile Include="Interfaces\IDhlWaybillExcelBuilder.cs" />
+    <Compile Include="Interfaces\IPacketDeliveredReportService.cs" />
     <Compile Include="Interfaces\IWaybillInfoExtractor.cs" />
     <Compile Include="Interfaces\IWaybillPrinter.cs" />
     <Compile Include="JokeProvide.cs" />
@@ -128,15 +136,15 @@
     <Compile Include="ResourceReleaser.cs" />
     <Compile Include="RexHelper.cs" />
     <Compile Include="WaybillQueryManager.cs" />
-    <Compile Include="WaybillPrinterFactory.cs" />
+    <Compile Include="Factory\WaybillPrinterFactory.cs" />
     <Compile Include="WaybillSetting.cs" />
-    <Compile Include="WaybillSettingFactory.cs" />
-    <Compile Include="ZdBpostDetailsProvider.cs" />
-    <Compile Include="ZdBpostWaybillAnalyser.cs" />
-    <Compile Include="ZdBpostWaybillEmailBuilder.cs" />
-    <Compile Include="ZdBpostWaybillExcelBuilder.cs" />
-    <Compile Include="ZdBpostWaybillInfoExtractor.cs" />
-    <Compile Include="ZdBpostWaybillPrinter.cs" />
+    <Compile Include="Factory\WaybillSettingFactory.cs" />
+    <Compile Include="Bpost\ZdBpostDetailsProvider.cs" />
+    <Compile Include="Bpost\ZdBpostWaybillAnalyser.cs" />
+    <Compile Include="Bpost\ZdBpostWaybillEmailBuilder.cs" />
+    <Compile Include="Bpost\ZdBpostWaybillExcelBuilder.cs" />
+    <Compile Include="Bpost\ZdBpostWaybillInfoExtractor.cs" />
+    <Compile Include="Bpost\ZdBpostWaybillPrinter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\daigou.domain\daigou.domain.csproj">

@@ -25,9 +25,24 @@ namespace daigou.services
             modeList.Add(new ProcessModeInfo(
                 "中德快递Bpost",
                 "包裹代理",
+#if DEBUG
+                "ruifeng.zhang@cbb.de",
+#else
                 setting.ZdEmail,
+#endif
                 "" ,
-                setting.WanwanName, ""));         
+                setting.WanwanName, ""));
+
+            modeList.Add(new ProcessModeInfo(
+               "EMS",
+               "包裹代理",
+#if DEBUG
+                "ruifeng.zhang@cbb.de",
+#else
+               "dt8ang@qq.com",
+#endif
+                "",
+               setting.WanwanName, ""));        
 /*
             modeList.Add(new ProcessModeInfo(
              "散客=>包裹已发",

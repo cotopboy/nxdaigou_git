@@ -18,52 +18,25 @@ namespace daigou.services
             this.directoryService = directoryService;
         }
 
-        public void TryCorrectFileName()
-        {
-            List<string> recipientPdfFileList = new List<string>();
-            DirectoryInfo fdir = new DirectoryInfo(this.directoryService.GetOrCreateBaseDir());
-            FileInfo[] file = fdir.GetFiles();
-            foreach (var item in file)
-            {
-               string fileName = item.Name;
-               if (fileName.Contains("ä1ñ7"))
-               {
-                   fileName = fileName.Replace("ä1ñ7", "`");
-               }
-               if (fileName.Contains("íñ"))
-               {
-                   fileName = fileName.Replace("íñ", "`");
-               }
-               item.MoveTo(Path.Combine(item.Directory.FullName, fileName));
-            }
-
-        }
-
         public string GetDHLFile(domain.Recipient recipient,uint nameIndex)
         {
             List<string> allfile = this.GetRecipientPdfFileList(recipient, nameIndex);
 
-            return allfile.First(x => x.Contains('`'));
+            return allfile.First(x => x.Contains('0'));
         }
 
         internal string GetBpostCN23File(domain.Recipient recipient, uint nameIndex)
         {
             List<string> allfile = this.GetRecipientPdfFileList(recipient, nameIndex);
 
-            return allfile.Where(x => !x.Contains('`') &&
-                                      !x.Contains('ä') &&
-                                       x.Contains('2')
-                                 ).First();
+            return allfile.Where(x => x.Contains('2')).First();
         }
 
         public string GetBpostFile(domain.Recipient recipient, uint nameIndex)
         {
             List<string> allfile = this.GetRecipientPdfFileList(recipient, nameIndex);
 
-            return allfile.Where(x => !x.Contains('`') && 
-                                      !x.Contains('ä') &&
-                                       x.Contains('1') 
-                                 ).First();
+            return allfile.Where(x => x.Contains('1')).First();
         }
 
         public List<string> GetRecipientPdfFileList(domain.Recipient recipient, uint nameIndex)
@@ -103,7 +76,7 @@ namespace daigou.services
 
             foreach (var item in recipientPdfFileList)
             {
-                if (item.Count(x => x == '`') == nameIndex) ret.Add(item);
+                if (item.Count(x => x == '0') == nameIndex) ret.Add(item);
                 else if (item.Count(x => x == '1') == nameIndex) ret.Add(item);
                 else if (item.Count(x => x == '2') == nameIndex) ret.Add(item);
                 else continue;
@@ -132,8 +105,8 @@ namespace daigou.services
             string min = name.Substring(1);
 
             HashSet<string> set = new HashSet<string>();
-            set.Add(string.Format("{0} {1}`", xin.ToPinyin(), min.ToPinyin().Replace(" ", "")));
-            set.Add(string.Format("{0} {1}`", xin.ToPinyin(), min.ToPinyin()));
+            set.Add(string.Format("{0} {1}0", xin.ToPinyin(), min.ToPinyin().Replace(" ", "")));
+            set.Add(string.Format("{0} {1}0", xin.ToPinyin(), min.ToPinyin()));
             set.Add(string.Format("{0}", name.NameToPinyin()));
             set.Add(string.Format("{0}", name.ToPinyin()).Replace(" ", ""));
             set.Add(string.Format("{0}", name.ToPinyin()));

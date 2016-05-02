@@ -85,7 +85,7 @@
             </ListView>
 
         </DockPanel>
-        <ScrollViewer Grid.Column="1" >
+        <ScrollViewer Grid.Column="1">
         <StackPanel Orientation="Vertical">
 
                 <DockPanel>
@@ -121,7 +121,12 @@
                 <TextBox Text="{Binding ElementName=orderListView,Path=SelectedItem.Order.PacketWeight,UpdateSourceTrigger=PropertyChanged}" MinWidth="60" Style="{StaticResource TB_NoBorder}"></TextBox>
             </StackPanel>
 
-            <Rectangle Height="2" Fill="Gray" DockPanel.Dock="Top"/>
+                <StackPanel Orientation="Horizontal" Margin="0 10">
+                    <Label  Content="物流公司"  />
+                    <TextBox Text="{Binding ElementName=orderListView,Path=SelectedItem.Order.LogisticsType,UpdateSourceTrigger=PropertyChanged}" MinWidth="60" Style="{StaticResource TB_NoBorder}"></TextBox>
+                </StackPanel>
+
+                <Rectangle Height="2" Fill="Gray" DockPanel.Dock="Top"/>
 
             <StackPanel Orientation="Horizontal" Margin="0 10" >
                 <Label  Content="运单号"  />

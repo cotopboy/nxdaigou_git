@@ -6,6 +6,7 @@ using Utilities.IO;
 using System.IO;
 using Utilities.DataTypes.ExtensionMethods;
 using Utilities.IO.ExtensionMethods;
+using System.Globalization;
 
 namespace daigou.services
 {
@@ -39,7 +40,7 @@ namespace daigou.services
 
         public float GetFloatValue(string input)
         {
-            return float.Parse(input);
+            return float.Parse(input,CultureInfo.InvariantCulture);
         }
 
     }

@@ -28,6 +28,25 @@ namespace daigou.modules.Order
             }
         }
 
+
+        public double ActualWeight
+        {
+            get { return this.Order.ActualWeight; }
+            set
+            {
+                this.Order.ActualWeight = value; RaisePropertyChanged("ActualWeight");
+            }
+        }
+
+        public string LogisticsType
+        {
+            get { return this.Order.LogisticsType; }
+            set
+            {
+                this.Order.LogisticsType = value; RaisePropertyChanged("LogisticsType");
+            }
+        }
+
         public bool IsOrderWaitToBeSent
         {
             get { return !this.Order.OrderStatusTags.Contains("sent");}
@@ -66,12 +85,12 @@ namespace daigou.modules.Order
             }
         }
 
-        private uint nameIndex = 1;
+        private string nameSpecifier = "1";
 
-        public uint NameIndex
+        public string NameSpecifier
         {
-            get { return nameIndex; }
-            set { nameIndex = value; RaisePropertyChanged("NameIndex"); }
+            get { return nameSpecifier; }
+            set { nameSpecifier = value; RaisePropertyChanged("NameSpecifier"); }
         }
 
 

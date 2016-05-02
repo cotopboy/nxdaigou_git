@@ -109,9 +109,13 @@
                 />
                 <Button Content="6X" Padding="10 0" Background="Lavender" Height="30" Margin="10 0" Command="{Binding Add6XCommand}" />
                 <Button Content="8X" Padding="10 0" Background="Gold" Height="30" Margin="10 0" Command="{Binding Add8XCommand}"/>                
-                <Label Content="同名重复参数" VerticalAlignment="Center" ></Label>
-                <TextBox Style="{StaticResource TB_NoBorder}" Text="{Binding NameIndex}" VerticalAlignment="Center"                          
-                        Background="White" BorderThickness="1" BorderBrush="DarkBlue" MinWidth="200"/>
+                <Label Content="同名数" VerticalAlignment="Center" ></Label>
+                <TextBox Style="{StaticResource TB_NoBorder}" Text="{Binding NameSpecifier}" VerticalAlignment="Center"                          
+                        Background="White" BorderThickness="1" BorderBrush="DarkBlue" MinWidth="50"/>
+
+                <Label Content="实重" VerticalAlignment="Center" ></Label>
+                <TextBox Style="{StaticResource TB_NoBorder}" Text="{Binding ActualWeight}" VerticalAlignment="Center"                          
+                        Background="White" BorderThickness="1" BorderBrush="DarkBlue" MinWidth="50"/>
 
             </StackPanel>
 
@@ -120,9 +124,14 @@
                 <TextBox Style="{StaticResource TB_NoBorder}" HorizontalAlignment="Left" DockPanel.Dock="Left"
                          Text="{Binding Order.Content}" 
                          AcceptsReturn="True" AcceptsTab="True" AutoWordSelection="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible"
-                         Background="White" BorderThickness="1" BorderBrush="DarkBlue" Margin="18 0 0 0" MinWidth="450"
+                         Background="White" BorderThickness="1" BorderBrush="DarkBlue" Margin="18 0 0 0" MinWidth="300"
                 />
-                
+                <TextBox Text="{Binding Order.Remark}" DockPanel.Dock="Left"
+                         AcceptsReturn="True" AcceptsTab="True" AutoWordSelection="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible"
+                         Background="White" BorderThickness="1" BorderBrush="DarkBlue" Margin="18 0 0 0" MinWidth="300"
+                         ></TextBox>
+                <Label Content="{Binding Order.LogisticsType}"  VerticalAlignment="Center" DockPanel.Dock="Left"></Label>
+
             </DockPanel>
 
             <Label  Foreground="{Binding IsSelected, Converter={StaticResource BooleanToGreyGreenConverter}}" FontSize="55" Grid.RowSpan="3" ContentStringFormat="{}{0}KG"  HorizontalAlignment="Right"    Content="{Binding Order.PacketWeight}" />

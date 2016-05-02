@@ -38,6 +38,11 @@ namespace daigou.infrastructure.ExtensionMethods
             return string.Format("{0} {1}", firstName, lastName);
         }
 
+        public static string NameToPinyinEMSFormat(this string Name)
+        {            
+            return Name.ToPinyin().Replace(" ","");
+        }
+
         public static string GetPinyinInitials(this string inputText)
         {
             StringBuilder builder = new StringBuilder();
