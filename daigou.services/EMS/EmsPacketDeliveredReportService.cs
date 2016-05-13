@@ -64,10 +64,6 @@ namespace daigou.services.EMS
                 msg.AppendLine("<br/>");
                 msg.AppendLine(string.Format("<b>货运单号:</b> {0},{1}", dhlWaybillSn.AddSquareBracket(), emsSn.AddSquareBracket()));
                 msg.AppendLine("<br/>");
-                msg.AppendLine("<b>发货详情:</b> " + string.Join("|", param.Order.Content.ToLines().ForEach(x => x.Replace(',', '_'))));
-                msg.AppendLine("<br/>");
-                msg.AppendLine("<b>报关详情:</b> " + string.Join("|", param.Order.Detail.ToLines().ForEach(x => x.Replace(',', '_'))));
-                msg.AppendLine("<br/>");
                 msg.AppendLine("<b>收件信息:</b> " + string.Format("{0}  {1}  {2}  {3}  {4}",
                     param.Recipient.Name,
                     param.Recipient.CnAddress,
@@ -76,8 +72,7 @@ namespace daigou.services.EMS
                     param.Recipient.OtherTels
                     ));
                 msg.AppendLine("<br/>");
-                msg.AppendLine("<b>包裹重量:</b> " + param.Order.PacketWeight.ToString() + " Kg");
-                msg.AppendLine("<br/>");
+
                 string dhlTemplate = "<a href=\"http://nolp.dhl.de/nextt-online-public/set_identcodes.do?lang=en&idc={0}&rfn=&extendedSearch=true\">http://nolp.dhl.de/nextt-online-public/set_identcodes.do?lang=en&idc={0}&rfn=&extendedSearch=true</a>";
                 string dhlSearchLink = string.Format("<b>境内查询:</b>" + dhlTemplate, dhlWaybillSn);
                 msg.AppendLine(dhlSearchLink);
