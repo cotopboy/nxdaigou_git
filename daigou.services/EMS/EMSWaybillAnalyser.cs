@@ -38,8 +38,8 @@ namespace daigou.services.EMS
             DirectoryInfo fdir = new DirectoryInfo(this.directoryService.GetOrCreateBaseDir());
             FileInfo[] file = fdir.GetFiles();
 
-            string pyName = recipient.Name.ToPinyin().Replace(" ", "");
-            var targetFile = file.Where(x => x.Name.StartsWith(pyName) && x.Name.Contains(NameSpecifier)).FirstOrDefault();
+            string pyName = recipient.Name.ToPinyin().Replace(" ", "").ToLower();
+            var targetFile = file.Where(x => x.Name.ToLower().StartsWith(pyName) && x.Name.Contains(NameSpecifier)).FirstOrDefault();
 
             return targetFile;
         }
