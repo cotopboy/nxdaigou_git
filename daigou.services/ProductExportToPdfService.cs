@@ -27,19 +27,29 @@ namespace daigou.services
             this.productPriceCalcuateService = productPriceCalcuateService;
         }
 
-        public void Export(List<domain.Product> productList, decimal euro2cny, decimal serviceRate)
+        public void Export(List<domain.Product> productList, decimal euro2cny, decimal serviceRate,string fileType = ".pdf")
         {
             Document document = CreateDocument(productList,euro2cny,serviceRate);
             string ddl = MigraDoc.DocumentObjectModel.IO.DdlWriter.WriteToString(document);          
          
             bool unicode = true;
-            PdfFontEmbedding embedding = PdfFontEmbedding.Always;  
-                      
-            PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(unicode, embedding);            
-            pdfRenderer.Document = document;           
-            pdfRenderer.RenderDocument();            
-            string filename = Guid.NewGuid().ToString() + ".pdf";
-            pdfRenderer.PdfDocument.Save(filename);            
+            
+            string filename = Guid.NewGuid().ToString() + fileType;
+
+            if (fileType.IsSameAs(".pdf"))
+            {
+                PdfFontEmbedding embedding = PdfFontEmbedding.Always;
+                PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(unicode, embedding);
+                pdfRenderer.Document = document;
+                pdfRenderer.RenderDocument();
+                pdfRenderer.PdfDocument.Save(filename);
+            }
+            else
+            {
+                RtfDocumentRenderer rtf = new RtfDocumentRenderer();
+                rtf.Render(document, filename, null);
+            }
+
             Process.Start(filename);
         }
 

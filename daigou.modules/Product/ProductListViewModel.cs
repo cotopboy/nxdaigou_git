@@ -38,6 +38,19 @@ namespace daigou.modules.Product
 
         private ProductItemViewModel selectedItem = null;
         private IEventAggregator eventAggregator = null;
+
+        private string exportFileType = ".pdf";
+
+        public string ExportFileType
+        {
+            get { return exportFileType; }
+            set
+            {
+                exportFileType = value;
+                RaisePropertyChanged("ExportFileType");
+            }
+        }
+
         private string filterTxt = "";
 
         public string FilterTxt
@@ -192,9 +205,10 @@ namespace daigou.modules.Product
                 return new DelegateCommand(() =>
                     {
                         this.productExportToPdfService.Export(
-                            this.ProductList.Where(x => x.IsSelected).Select(x => x.DomainProduct).ToList()
-                            ,this.Eruo2Cny
-                            ,this.SecondServiceRate);
+                              this.ProductList.Where(x => x.IsSelected).Select(x => x.DomainProduct).ToList()
+                            , this.Eruo2Cny
+                            , this.SecondServiceRate
+                            , this.ExportFileType);
                     });
             }
         }

@@ -85,7 +85,8 @@
                             <Button Content="全选" VerticalAlignment="Center" Command="{Binding SelectAllCommand}" Height="20" Margin="2" Background="LightBlue" />
                             <Button Content="中选显示" VerticalAlignment="Center" Command="{Binding SelectDisplayedItemCommand}" Height="20" Margin="2" Background="LightBlue" />
                             <Button Content="全不选" VerticalAlignment="Center" Command="{Binding DeSelectAllCommand}" Height="20" Margin="2" Background="LightCoral" />
-                            <Button Content="导出" VerticalAlignment="Center" Command="{Binding ExportCommand}" Height="39" Margin="2" Background="Orange" />
+                            <Button Content="导出" VerticalAlignment="Center" Command="{Binding ExportCommand}" Height="23" Margin="2" Background="Orange" />
+                            <TextBox  Name="textBox1" Width="120" Text="{Binding ExportFileType}" />
                         </StackPanel>
 
 
