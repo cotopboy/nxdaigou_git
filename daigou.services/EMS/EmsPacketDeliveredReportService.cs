@@ -64,6 +64,8 @@ namespace daigou.services.EMS
                 msg.AppendLine("<br/>");
                 msg.AppendLine(string.Format("<b>货运单号:</b> {0},{1}", dhlWaybillSn.AddSquareBracket(), emsSn.AddSquareBracket()));
                 msg.AppendLine("<br/>");
+                msg.AppendLine("<b>发货详情:</b> " + string.Join("|", param.Order.Content.ToLines().ForEach(x => x.Replace(',', '_'))));
+                msg.AppendLine("<br/>");
                 msg.AppendLine("<b>收件信息:</b> " + string.Format("{0}  {1}  {2}  {3}  {4}",
                     param.Recipient.Name,
                     param.Recipient.CnAddress,
