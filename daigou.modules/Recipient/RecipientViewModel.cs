@@ -78,6 +78,13 @@ namespace daigou.modules.Recipient
                 {
                     lines[1]=x;
                 }
+                if (x.IsSameAs("FAKE"))
+                {
+                    lines.Add("baby.food 6 0.5 3");
+                    lines.Add("Sanitary.napkins 2 0.3 5");
+                    lines.Add("Daily.necessities 2 0.8 3 ");
+
+                }
                 else
                 {
                     if (lines.Count >= 4) return;

@@ -77,6 +77,7 @@
                         </WrapPanel>
 
                         <WrapPanel>
+                            <Button Content="Fake" VerticalAlignment="Center"  Command="{Binding AddOrderDetailsCommand}" CommandParameter="FAKE" Height="30"  Margin="2" Background='DarkSeaGreen' MinWidth="200"/>
                             <Button Content="6X" VerticalAlignment="Center"  Command="{Binding AddOrderDetailsCommand}" CommandParameter="milk.powder 6 0.8 12" Height="30"  Margin="2" Background="SkyBlue" MinWidth="50"/>
                             <Button Content="8X" VerticalAlignment="Center"  Command="{Binding AddOrderDetailsCommand}" CommandParameter="milk.powder 8 0.6 10" Height="30"  Margin="2" Background="#9B8B0000" MinWidth="50"/>
 
