@@ -457,7 +457,9 @@ namespace daigou.modules.Recipient
         {
             RecipientItemViewModel recipient = targetObj as RecipientItemViewModel;
 
-            var filterItems = this.FilterTxt.Split(new string[] { ";", ",", "，" }, StringSplitOptions.RemoveEmptyEntries);
+            var filterItems = this.FilterTxt
+                                  .Trim()
+                                  .Split(new string[] { ";", ",", "，" }, StringSplitOptions.RemoveEmptyEntries);
 
             if (filterItems.Length == 0) return true;
 
