@@ -257,10 +257,10 @@
                     </Style>
                 </Grid.Resources>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="90" /> <!--0-->
+                    <ColumnDefinition Width="*" /> <!--0-->
                     <ColumnDefinition Width="300" />  <!--1-->
-                    <ColumnDefinition Width="*" /> <!--2-->
-                    <ColumnDefinition Width="300" /> <!--3-->
+                    <ColumnDefinition Width="150" /> <!--3-->
+                    <ColumnDefinition Width="200" /> <!--2-->
                     <ColumnDefinition Width="50" /> <!--4-->
                     <ColumnDefinition Width="50" />
                 
@@ -269,10 +269,14 @@
                     <RowDefinition Height="22" />
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Column="0" Orientation="Horizontal"  Background="{x:Null}" >
-                <Label FontWeight="Black" Content="{Binding ProductCode}" />
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Background="{x:Null}">
+                    <Label   Content="{Binding ProductName}"   />
+                    <TextBox  Style="{StaticResource TB_NoBorder}" FontSize="12" Margin="0" Padding="0"  VerticalAlignment="Stretch" VerticalContentAlignment="Center" Foreground="DarkBlue" FontWeight="Black"  MinWidth="100"   Text="{Binding DomainBillItem.Remark}" />
                 </StackPanel>
 
+             
+                
 
                 <StackPanel Grid.Column="1" Orientation="Horizontal"  Background="{x:Null}" >
                     <TextBox Style="{StaticResource TB_NoBorder}" FontSize="12" MinWidth="70" HorizontalContentAlignment="Right" Text="{Binding DomainBillItem.SellPrice}" FontWeight="Black" />
@@ -283,18 +287,18 @@
                     <Label Content="￥"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="2" Orientation="Horizontal" Background="{x:Null}">
-                    <Label   Content="{Binding ProductName}"   />
-                    <TextBox  Style="{StaticResource TB_NoBorder}" FontSize="12" Margin="0" Padding="0"  VerticalAlignment="Stretch" VerticalContentAlignment="Center" Foreground="DarkBlue" FontWeight="Black"  MinWidth="100"   Text="{Binding DomainBillItem.Remark}" />
-                </StackPanel>
 
-                <StackPanel Grid.Column="3" Orientation="Horizontal"   Background="{x:Null}" >
+                <StackPanel Grid.Column="2" Orientation="Horizontal"   Background="{x:Null}" >
                     <Label  Content="规格: " />
                     <Label  Content="{Binding ProductSpec}" MinWidth="150" />
-                    <Label  Content="重量: " />
-                    <Label  Content="{Binding WeightSummary}" />
-                    <Label  Content="kg" />
                 </StackPanel>
+                
+                <StackPanel Grid.Column="3" Orientation="Horizontal"  Background="{x:Null}" >
+                    <Label FontWeight="Black" Content="{Binding ProductCode}" />
+                </StackPanel>
+
+
+              
 
                
 
@@ -341,35 +345,23 @@
                     <TextBox  FontSize="18" Style="{StaticResource TB_NoBorder}" FontWeight="Black" VerticalAlignment="Center" VerticalContentAlignment="Center"  Text="{Binding DomainBill.CustomerName}" MinWidth="100" />
 
 
-                    <Label Content="        " />
-
-                    <Label Content="账单编号: " />
-                    <Label FontWeight="Black"  Content="{Binding DomainBill.Id}" ContentStringFormat="{}Nx{0:D4}" Foreground="DarkOrchid" />
-
-                    <Label Content="        " />
-                    
-                    <Label Content="创建时间: " />
-                    <Label FontWeight="Black"  Content="{Binding DomainBill.CreatedTime,Converter={StaticResource DateTimeToStringConverter}}" />
-
                     <Label FontWeight="Black"   Content="        " />
 
-                    <Label FontWeight="Black"  Content="总计: " />
+                    <Label FontWeight="Black"  Content="本单合计: " />
                     <Label  Content="{Binding Summary}"   Foreground="OrangeRed"/>
                     <Label  Content="元" />
 
                     <Label FontWeight="Black"   Content="        " />
+                    
+                    <Label  FontWeight="Black"  Content="备注: " />
+                    <TextBox FontSize="13" Style="{StaticResource TB_NoBorder}" VerticalAlignment="Center" VerticalContentAlignment="Center"  MinWidth="650"  Text="{Binding DomainBill.Remark}" />
 
+                    <Label FontWeight="Black"   Content="        " />
+                    
                     <Label FontWeight="Black"  Content="重量总计: " />
                     <Label  Content="{Binding WeightSummary}"   Foreground="BlueViolet"/>
                     <Label  Content="kg" />
-
-                    <Label FontWeight="Black"   Content="        " />
-
-
-                    <Label  FontWeight="Black"  Content="备注: " />
-                    <TextBox FontSize="13" Style="{StaticResource TB_NoBorder}" VerticalAlignment="Center" VerticalContentAlignment="Center"  MinWidth="100"  Text="{Binding DomainBill.Remark}" />
-
-
+                    
                 </StackPanel>
 
                 <Label Grid.Row="1" FontWeight="Black" Width="100" Content="详情 "  HorizontalAlignment="Left" >

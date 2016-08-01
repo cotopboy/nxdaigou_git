@@ -19,6 +19,7 @@ using daigou.services;
 using daigou.domain.Base;
 using System.Xml.Serialization;
 using System.IO;
+using System.Globalization;
 
 namespace daigou.modules.Recipient
 {
@@ -95,6 +96,37 @@ namespace daigou.modules.Recipient
             }); }
         }
 
+        public double CalculatedWeight
+        {
+            get { return GetCalculatedWeight(); }
+
+        }
+
+        private double GetCalculatedWeight()
+        {
+            try
+            {
+                var lines = this.DeclarationInfo.Trim().ToLines().Skip(1).ToList();
+
+                double sum = 0.0;
+                foreach (var line in lines)
+                {
+                    var array = line.Split(' ');
+
+                    double count = double.Parse(array[1], CultureInfo.InvariantCulture);
+                    double singleWeight = double.Parse(array[2], CultureInfo.InvariantCulture);
+
+                    sum += count*singleWeight;
+                }
+
+                return Math.Round(sum,2);
+            }
+            catch
+            {
+                return -1.0;
+            }
+
+        }
 
         private readonly DelegateCommand<int?> removeRecipientCommand;
         private readonly DelegateCommand<RecipientItemViewModel> saveRecipientChangeCommand;
@@ -279,7 +311,12 @@ namespace daigou.modules.Recipient
         public string DeclarationInfo
         {
             get { return declarationInfo; }
-            set { declarationInfo = value; RaisePropertyChanged("DeclarationInfo"); }
+            set 
+            {
+                declarationInfo = value; 
+                RaisePropertyChanged("DeclarationInfo");
+                RaisePropertyChanged("CalculatedWeight");
+            }
         }
 
         public string OrderInfo
@@ -551,6 +588,8 @@ namespace daigou.modules.Recipient
             }
             catch { }
         }
+
+       
     }
 
     public class OrderExampleItem

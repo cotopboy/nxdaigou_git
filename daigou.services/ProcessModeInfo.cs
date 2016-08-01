@@ -22,16 +22,6 @@ namespace daigou.services
 
             var setting = this.waybillSettingFactory.Create();
 
-            modeList.Add(new ProcessModeInfo(
-                "中德快递Bpost",
-                "包裹代理",
-#if DEBUG
-                "ruifeng.zhang@cbb.de",
-#else
-                setting.ZdEmail,
-#endif
-                "" ,
-                setting.WanwanName, ""));
 
             modeList.Add(new ProcessModeInfo(
                "EMS",
@@ -43,6 +33,18 @@ namespace daigou.services
 #endif
                 "",
                setting.WanwanName, ""));        
+
+            modeList.Add(new ProcessModeInfo(
+                "中德快递Bpost",
+                "包裹代理",
+#if DEBUG
+                "ruifeng.zhang@cbb.de",
+#else
+                setting.ZdEmail,
+#endif
+                "" ,
+                setting.WanwanName, ""));
+
 /*
             modeList.Add(new ProcessModeInfo(
              "散客=>包裹已发",

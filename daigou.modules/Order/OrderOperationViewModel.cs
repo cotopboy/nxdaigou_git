@@ -111,7 +111,7 @@ namespace daigou.modules.Order
              (OnRecipientNewOrderAdded, ThreadOption.UIThread);
 
             this.ModeList = this.ProcessModeInfoProvider.ModeList;
-            this.SelectedDHLAgent = this.ModeList.Single(x => x.Name.StartsWith("中德快递"));
+            this.SelectedDHLAgent = this.ModeList.Single(x => x.Name.StartsWith("EMS"));
 
             
         }
@@ -741,9 +741,10 @@ namespace daigou.modules.Order
                 }
                 catch { }
             }
-            catch
+            catch(Exception exp)
             {
                 MessageBox.Show("出现错误","出错了", MessageBoxButton.OK, MessageBoxImage.Exclamation, MessageBoxResult.OK);
+                MessageBox.Show(exp.GetDetailErrorText());
             }
 
             IsUIEnable = true;

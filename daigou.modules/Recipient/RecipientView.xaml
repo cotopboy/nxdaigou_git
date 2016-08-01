@@ -46,29 +46,16 @@
         
         <ScrollViewer Grid.Column="1" Margin="10">
         <StackPanel>
-                <Expander Header="打印中文地址标签" Background="#1C32CD32" >
-                    <StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label  DockPanel.Dock="Left" Content="重量" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                        <TextBox Text="{Binding CnLabelKgValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource TB_NoBorder}" Width="30"></TextBox>
-                        <Label  DockPanel.Dock="Left" Content="KG" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label  DockPanel.Dock="Left" Content="备注" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                            <TextBox Text="{Binding RemarkTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource TB_NoBorder}" MinWidth="160"></TextBox>
-                    </StackPanel>
-            
-                     <Button Margin="10" Background="#697CA36D"  Content="打印中文地址标签"  VerticalContentAlignment="Center" VerticalAlignment="Center" Command="{Binding PrintCNAddressLabelCommand}" Height="60" />
-                    </StackPanel>
-                </Expander>
+               
             
                 <Expander Header="增加到新订单" IsExpanded="True" Background="#37FFFFAA" IsManipulationEnabled="False" Foreground="Black">
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
                             <Label Content="报关信息 [商品名] [个数] [净重] [单价]" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                            <Button Content="清空" VerticalAlignment="Center"  Command="{Binding CleanCommand}"  Height="20"   Background="YellowGreen" MinWidth="70" Width="144" />
+                            <Label Content="{Binding CalculatedWeight}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                            <Button Content="清空" VerticalAlignment="Center"  Command="{Binding CleanCommand}"  Height="20"   Background="YellowGreen" MinWidth="70" />
                         </StackPanel>
-                        <TextBox Style="{StaticResource TB_NoBorder}" Text="{Binding DeclarationInfo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinHeight="50" FontSize="13" Foreground="DarkBlue" AcceptsReturn="True" TextWrapping="Wrap" Height="113"></TextBox>
+                        <TextBox Style="{StaticResource TB_NoBorder}" Text="{Binding DeclarationInfo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinHeight="50" FontSize="13" Foreground="DarkBlue" AcceptsReturn="True" TextWrapping="Wrap" Height="83"></TextBox>
                         <WrapPanel>
                             <Button Content="7kg" VerticalAlignment="Center"  Command="{Binding AddOrderWeightCommand}" CommandParameter="{Binding Content,RelativeSource={RelativeSource Self}}" Height="30"  Margin="5" Background="YellowGreen" MinWidth="70"/>
                             <Button Content="8kg" VerticalAlignment="Center"  Command="{Binding AddOrderWeightCommand}" CommandParameter="{Binding Content,RelativeSource={RelativeSource Self}}" Height="30"  Margin="5" Background="MintCream" MinWidth="70"/>
@@ -162,8 +149,22 @@
              <StackPanel Orientation="Horizontal">                
                 <Button  Content="Delete" Margin="10px"   Name="BtnDelete" VerticalAlignment="Top" Command="{Binding RemoveRecipientCommand}" CommandParameter="{Binding Path=SelectedItem.ID, ElementName=listView1}"  />
             </StackPanel>
-            
-            <StackPanel>
+            <Expander Header="打印中文地址标签" Background="#1C32CD32" >
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label  DockPanel.Dock="Left" Content="重量" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding CnLabelKgValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource TB_NoBorder}" Width="30"></TextBox>
+                        <Label  DockPanel.Dock="Left" Content="KG" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label  DockPanel.Dock="Left" Content="备注" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding RemarkTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource TB_NoBorder}" MinWidth="160"></TextBox>
+                    </StackPanel>
+
+                    <Button Margin="10" Background="#697CA36D"  Content="打印中文地址标签"  VerticalContentAlignment="Center" VerticalAlignment="Center" Command="{Binding PrintCNAddressLabelCommand}" Height="60" />
+                </StackPanel>
+            </Expander>
+                <StackPanel>
                 
             </StackPanel>
                     

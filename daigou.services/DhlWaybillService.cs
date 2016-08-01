@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
+
 namespace daigou.services
 {
     public class DhlWaybillService
@@ -85,6 +86,11 @@ namespace daigou.services
             foreach (var agentType in agentTypeList)
             {
                 List<PrintWayBillParam> list = rawlist.Where(x => x.Order.LogisticsType == agentType).ToList();
+
+                if (string.IsNullOrEmpty(agentType))
+                {
+                    throw new InvalidDataException("Agent Type is missing!");
+                }
 
                 var extractor = this.waybillInfoExtractorFactory.CreateInfoExtractor(agentType);
                 extractor.ExtractWaybillInfo(list);
