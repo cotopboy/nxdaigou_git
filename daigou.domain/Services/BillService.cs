@@ -33,5 +33,21 @@ namespace daigou.domain.Services
         {
             this.repository.Add(target);
         }
+
+        public void DeleteOldData(int keepLastNdays)
+        {
+            var allBills = this.repository.GetAllBills();
+
+            DateTime limit = DateTime.Now.AddDays(-1*keepLastNdays);
+
+            var deleteIds = allBills.Where(x => x.CreatedTime < limit).Select(x => x.Id).ToList();
+
+            foreach (var id in deleteIds)
+            {
+                this.repository.Delete(id);
+            }
+
+            this.Save();
+        }
     }
 }
