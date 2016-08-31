@@ -48,6 +48,13 @@ namespace daigou.modules.Bill
             set { productSpec = value; RaisePropertyChanged("ProductSpec"); }
         }
 
+        private string suitablePeople;
+        public string SuitablePeople
+        {
+            get { return suitablePeople; }
+            set { suitablePeople = value; RaisePropertyChanged("SuitablePeople"); }
+        }
+
         private decimal weight;
 
         public decimal WeightSummary
@@ -71,8 +78,9 @@ namespace daigou.modules.Bill
         }
 
 
-        public BillItemVM(string productName,string productSpec,string productCode,decimal weight,BillItem domainBillItem)
+        public BillItemVM(string productName,string productSpec,string productCode,string suitablePeople,decimal weight,BillItem domainBillItem)
         {
+            this.suitablePeople = suitablePeople; 
             this.productCode = productCode;
             this.productName = productName;
             this.productSpec = productSpec;

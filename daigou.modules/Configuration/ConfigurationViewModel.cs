@@ -7,6 +7,8 @@ using daigou.domain;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.ViewModel;
 using daigou.domain.Services;
+using System.Diagnostics;
+using Utilities.IO;
 
 namespace daigou.modules.Configuration
 {
@@ -17,6 +19,7 @@ namespace daigou.modules.Configuration
         private ConfigurationService configurationService;
         private readonly DelegateCommand loadListCommand;
         private readonly DelegateCommand saveCommand;
+        private readonly DelegateCommand genBinDbCommand;
 
         private readonly DelegateCommand deleteOldDataCommand;
 
@@ -29,8 +32,12 @@ namespace daigou.modules.Configuration
         public DelegateCommand SaveCommand
         {
             get { return saveCommand; }
-        } 
+        }
 
+        public DelegateCommand GenBinDbCommand
+        {
+            get { return genBinDbCommand; }
+        }
 
         public DelegateCommand LoadListCommand
         {
@@ -66,12 +73,21 @@ namespace daigou.modules.Configuration
             this.loadListCommand = new DelegateCommand(LoadList);
             this.saveCommand = new DelegateCommand(Save);
             this.deleteOldDataCommand = new DelegateCommand(DeleteOldData);
+            this.genBinDbCommand = new DelegateCommand(GenBinDb);
         }
 
         private void DeleteOldData()
         {
             this.billService.DeleteOldData(30);
             this.orderService.DeleteOldData(30);
+        }
+
+        private void GenBinDb()
+        {
+            this.configurationService.GenBinDb();
+
+            string filePath = DirectoryHelper.CombineWithCurrentExeDir("bindb.dat");
+            Process.Start("explorer.exe", "/select,\"" + filePath + "\"");
         }
 
         private void Save()

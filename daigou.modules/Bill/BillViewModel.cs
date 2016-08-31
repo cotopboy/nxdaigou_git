@@ -132,7 +132,7 @@ namespace daigou.modules.Bill
 
                 if(product == null) continue;
 
-                BillItemVM vm = new BillItemVM(product.Brand +"->"+product.Name, product.Spec, product.Code, product.GrossWeight, item);
+                BillItemVM vm = new BillItemVM(product.Brand +"->"+product.Name, product.Spec, product.Code,product.ApplicableCrowd, product.GrossWeight, item);
                 vm.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(vm_PropertyChanged);
                 vm.OnItemDeleted += new Action<BillItemVM>(BillItem_OnItemDeleted);
                 item.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(item_PropertyChanged);
@@ -193,6 +193,7 @@ namespace daigou.modules.Bill
                  var vmObj = new BillItemVM(productVm.DomainProduct.Brand + "->" + productVm.DomainProduct.Name,
                      productVm.DomainProduct.Spec,
                      productVm.DomainProduct.Code,
+                     productVm.DomainProduct.ApplicableCrowd,
                      productVm.DomainProduct.GrossWeight,
                      dmObj);
 

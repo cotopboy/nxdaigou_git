@@ -14,5 +14,7 @@ namespace daigou.domain
         void Save(Configuration item);
 
         void AddOrUpdate(string key, string value);
+
+        void GenBinDb();
     }
 }

@@ -38,6 +38,11 @@ namespace daigou.domain
 	        }
         }
 
+        public void GenBinDb()
+        {
+            this.repository.GenBinDb();
+        }
+
 
     }
 }

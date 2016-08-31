@@ -10,6 +10,7 @@
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
                 <Button Content="Save" Margin="10" Command="{Binding SaveCommand}" Height="50" Width="180" Background="Orange"></Button>
                 <Button Content="数据库减肥" Margin="10" Command="{Binding DeleteOldDataCommand}" Height="50" Width="180" Background="Orange"></Button>
+                <Button Background="Green" Command="{Binding GenBinDbCommand}" Content="成生BinDb.dat" Height="50" Width="180" />
             </StackPanel>
             
             <Rectangle Height="2" Fill="Gray" DockPanel.Dock="Top" Margin="0 0 0 10"/>

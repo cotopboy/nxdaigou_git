@@ -153,7 +153,7 @@ namespace daigou.services
                 imagePara.Format.Alignment = ParagraphAlignment.Center;
 
                 row.Cells[0].Add(imagePara);
-                row.Cells[1].AddParagraph("编号: " + item.ID + "\t\t别名:" + item.Code + "   ");
+                row.Cells[1].AddParagraph("编号: " + item.ID.ToString("00000") + "\t\t别名:" + item.Code + "   ");
 
                 string priceTxt = this.productPriceCalcuateService.GetPrice(item, euro2cny * serviceRate).ToString() + "元";
                 Paragraph pricePara = new Paragraph();

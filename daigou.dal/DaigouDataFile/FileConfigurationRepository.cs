@@ -54,5 +54,10 @@ namespace daigou.dal.DaigouDataFile
                 this.fileDbmgr.Save();
             }
         }
+
+        public void GenBinDb()
+        {
+            fileDbmgr.SaveAsBin();
+        }
     }
 }

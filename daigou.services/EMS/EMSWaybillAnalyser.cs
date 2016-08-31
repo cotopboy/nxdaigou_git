@@ -25,7 +25,13 @@ namespace daigou.services.EMS
 
         internal string GetEmsFileName(domain.Recipient recipient, string NameSpecifier)
         {
+
             var targetFile = GetEmsFileInfo(recipient, NameSpecifier);
+
+            if (targetFile == null)                        
+            {
+                throw new FileNotFoundException(recipient.Name + " @ " + NameSpecifier);
+            }
 
             return targetFile.Name;
         }

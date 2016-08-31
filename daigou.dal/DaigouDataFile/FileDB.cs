@@ -37,6 +37,12 @@ namespace daigou.dal.DaigouDataFile
             return db;
         }
 
+
+        public void SaveAsBin()
+        {
+            FormatterMg.BinarySerObject(this.db, DirectoryHelper.CombineWithCurrentExeDir("bindb.dat"));
+        }
+
         public void Save()
         {
             Byte[] bytes = this.db.ObjectToBlob();
