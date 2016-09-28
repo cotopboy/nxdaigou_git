@@ -1,0 +1,6 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ContentControl x:Key="add_new_recipient_hint">
+       [姓名] [地址] [邮编] [电话]
+    </ContentControl>
+</ResourceDictionary>
