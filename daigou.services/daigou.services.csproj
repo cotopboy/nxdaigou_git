@@ -73,9 +73,7 @@
     <Reference Include="PdfSharp-WPF">
       <HintPath>..\bin\ThirdParty\PdfSharp-WPF.dll</HintPath>
     </Reference>
-    <Reference Include="PdfSharp.Charting-WPF">
-      <HintPath>..\bin\ThirdParty\PdfSharp.Charting-WPF.dll</HintPath>
-    </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />

@@ -146,13 +146,16 @@ namespace daigou.services
 
                 Row row = table.AddRow();
                 row.Cells[0].MergeDown = 2;
-                string path = (item.Photo.IsNullOrEmpty()) ? "images\\default.png" : item.Photo;
 
-                Paragraph imagePara = new Paragraph();
-                imagePara.Add(CreateImage(DirectoryHelper.CombineWithCurrentExeDir(path)));
-                imagePara.Format.Alignment = ParagraphAlignment.Center;
+                if (!item.Photo.IsNullOrEmpty())
+                {
+                    string path = item.Photo.Replace("images", "smallimage");
+                    Paragraph imagePara = new Paragraph();
+                    imagePara.Add(CreateImage(DirectoryHelper.CombineWithCurrentExeDir(path)));
+                    imagePara.Format.Alignment = ParagraphAlignment.Center;
+                    row.Cells[0].Add(imagePara);
+                }
 
-                row.Cells[0].Add(imagePara);
                 row.Cells[1].AddParagraph("编号: " + item.ID.ToString("00000") + "\t\t别名:" + item.Code + "   ");
 
                 string priceTxt = this.productPriceCalcuateService.GetPrice(item, euro2cny * serviceRate).ToString() + "元";

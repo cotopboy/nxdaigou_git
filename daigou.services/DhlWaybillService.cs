@@ -108,8 +108,16 @@ namespace daigou.services
             }
 
             string folderName = DateTime.Now.ToString("yyyy_MM_dd") + "_" + string.Join("_", rawlist.Select(x => x.Recipient.Name));
-            string folderPath = Path.Combine(this.directoryService.GetOrCreateBaseDir(), folderName);
+            string baseFolder = this.directoryService.GetOrCreateBaseDir();
+            string folderPath = Path.Combine(baseFolder, folderName);
             if (!Directory.Exists(folderPath)) Directory.CreateDirectory(folderPath);
+
+            var pdfFiles = Directory.GetFiles(baseFolder, "*.pdf");
+
+            foreach (var file in pdfFiles)
+            {
+                File.Move(file, Path.Combine(folderPath, Path.GetFileName(file)));
+            }
         }
     }
 

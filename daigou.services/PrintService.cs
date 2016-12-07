@@ -6,7 +6,6 @@ using System.Text;
 using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Interop.Excel;
 using daigou.infrastructure.ExtensionMethods;
-using PdfSharp.Pdf.Printing;
 using System.IO;
 using System.Threading;
 
@@ -37,13 +36,13 @@ namespace daigou.services
         private void PrintPDF(string fileName)
         {
             // On my computer (running Windows Vista 64) it is here:
-            PdfFilePrinter.AdobeReaderPath = @"C:\Program Files (x86)\Adobe\Reader 11.0\Reader\AcroRd32.exe";
+           // PdfFilePrinter.AdobeReaderPath = @"C:\Program Files (x86)\Adobe\Reader 11.0\Reader\AcroRd32.exe";
 
             // Set the file to print and the Windows name of the printer.
             // At my home office I have an old Laserjet 6L under my desk.
-            PdfFilePrinter printer = new PdfFilePrinter(fileName, "激光");
+          //  PdfFilePrinter printer = new PdfFilePrinter(fileName, "激光");
 
-            printer.Print();
+          //  printer.Print();
           
         }
 

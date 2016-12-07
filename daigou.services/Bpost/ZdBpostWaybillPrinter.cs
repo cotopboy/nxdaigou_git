@@ -10,8 +10,6 @@ using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using System.Diagnostics;
-using PdfSharp.Pdf.Printing;
-
 namespace daigou.services
 {
     public class ZdBpostWaybillPrinter : IWaybillPrinter

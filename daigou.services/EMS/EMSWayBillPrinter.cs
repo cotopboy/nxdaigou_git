@@ -7,7 +7,6 @@ using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using System.Diagnostics;
-using PdfSharp.Pdf.Printing;
 using Utilities.DataTypes.ExtensionMethods;
 using Utilities.IO.ExtensionMethods;
 
@@ -78,15 +77,18 @@ namespace daigou.services.EMS
 
             string combinedPdfFilename = this.CombinePDFFiles(recipientPdfFileList, recipient, order);
 
-
             foreach (var fileName in recipientPdfFileList)
             {
                 this.DeleteProcessedFile(fileName);
             }
+
+
         }
 
         private void AddWatermark(string filename, domain.Recipient recipient, domain.Order order)
         {
+          
+               
             string line1 = string.Format(order.ID.ToString() + "收件人:{0}                  电话:{1},{3}              邮编:{2}", recipient.Name, recipient.MainTel, recipient.PostCode, recipient.OtherTels);
            
             const int emSize = 9;
@@ -101,8 +103,18 @@ namespace daigou.services.EMS
             
             if (document.Version < 14)
                 document.Version = 14;
+            XGraphics gfx = null;
 
-            XGraphics gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Prepend);
+            try
+            {
+                gfx = XGraphics.FromPdfPage(page, XGraphicsPdfPageOptions.Prepend);
+            }
+            catch
+            { 
+                //ignore
+            }
+
+            if (gfx == null) return;
 
 
             XStringFormat format = new XStringFormat();
