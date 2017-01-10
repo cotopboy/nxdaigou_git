@@ -309,7 +309,7 @@
 
 
                 <StackPanel Grid.Column="3" Orientation="Horizontal"  Background="{x:Null}" >
-                    <Label FontWeight="Black" Content="{Binding ProductCode}" />
+                    <Label FontWeight="Black" Content="{Binding ProductId}" />
                 </StackPanel>
 
 

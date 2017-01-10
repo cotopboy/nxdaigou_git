@@ -108,7 +108,7 @@ namespace daigou.modules.Bill
 
         private void CopyDetail()
         {
-            var list = BillItemVMList.Select(x => x.ProductCode + "x" + x.DomainBillItem.Count);
+            var list = BillItemVMList.Select(x => x.ProductId + "x" + x.DomainBillItem.Count);
 
             string content = string.Join(Environment.NewLine, list);
 
@@ -132,7 +132,7 @@ namespace daigou.modules.Bill
 
                 if(product == null) continue;
 
-                BillItemVM vm = new BillItemVM(product.Brand +"->"+product.Name, product.Spec, product.Code,product.ApplicableCrowd, product.GrossWeight, item);
+                BillItemVM vm = new BillItemVM(product.Brand +"->"+product.Name, product.Spec, product.ID,product.ApplicableCrowd, product.GrossWeight, item);
                 vm.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(vm_PropertyChanged);
                 vm.OnItemDeleted += new Action<BillItemVM>(BillItem_OnItemDeleted);
                 item.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(item_PropertyChanged);
@@ -174,7 +174,7 @@ namespace daigou.modules.Bill
 
          internal void Add(Product.ProductItemViewModel productVm)
          {
-             var targetItem =this.BillItemVMList.SingleOrDefault(x => x.ProductCode == productVm.DomainProduct.Code);
+             var targetItem =this.BillItemVMList.SingleOrDefault(x => x.ProductId == productVm.DomainProduct.ID);
              if (targetItem != null)
              {
                  targetItem.DomainBillItem.SellPrice = productVm.SellPrice;
@@ -192,7 +192,7 @@ namespace daigou.modules.Bill
 
                  var vmObj = new BillItemVM(productVm.DomainProduct.Brand + "->" + productVm.DomainProduct.Name,
                      productVm.DomainProduct.Spec,
-                     productVm.DomainProduct.Code,
+                     productVm.DomainProduct.ID,
                      productVm.DomainProduct.ApplicableCrowd,
                      productVm.DomainProduct.GrossWeight,
                      dmObj);

@@ -32,12 +32,12 @@ namespace daigou.modules.Bill
             set { productName = value; RaisePropertyChanged("ProductName"); }
         }
 
-        private string productCode;
+        private int productId;
 
-        public string ProductCode
+        public int ProductId
         {
-            get { return productCode; }
-            set { productCode = value; RaisePropertyChanged("ProductCode"); }
+            get { return productId; }
+            set { productId = value; RaisePropertyChanged("ProductId"); }
         }
 
         private string productSpec;
@@ -78,10 +78,10 @@ namespace daigou.modules.Bill
         }
 
 
-        public BillItemVM(string productName,string productSpec,string productCode,string suitablePeople,decimal weight,BillItem domainBillItem)
+        public BillItemVM(string productName,string productSpec,int productId,string suitablePeople,decimal weight,BillItem domainBillItem)
         {
             this.suitablePeople = suitablePeople; 
-            this.productCode = productCode;
+            this.productId = productId;
             this.productName = productName;
             this.productSpec = productSpec;
             this.weight = weight;
