@@ -26,7 +26,9 @@ namespace daigou.domain
         private string _QQNumber     = string.Empty;
         private string _AgentName    = string.Empty;
         private string _Remark = string.Empty;
+        private string _CardId = string.Empty;
 
+        public string CardId { get { return _CardId; } set { _CardId = value; RaisePropertyChanged("CardId"); } }
         public string Remark      { get { return _Remark; } set { _Remark = value; RaisePropertyChanged("Remark"); } }
         public string AgentName   { get { return _AgentName; } set { _AgentName = value; RaisePropertyChanged("AgentName"); } }
         public string QQNumber    { get { return _QQNumber; } set { _QQNumber = value; RaisePropertyChanged("QQNumber"); } }

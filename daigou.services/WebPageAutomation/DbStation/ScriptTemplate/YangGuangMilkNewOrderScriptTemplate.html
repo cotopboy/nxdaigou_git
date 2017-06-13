@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://db-station.com/" />
+<title>#RecipentName#</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">#RecipentName#</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/index.php?s=shop&amp;c=member&amp;a=add_order</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=select2-distpickerProvince-container</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=distpickerProvince</td>
+	<td>#Province#</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=distpickerCity</td>
+	<td>#City#</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=distpickerDistrict</td>
+	<td>#District#</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=address</td>
+	<td>#Address#</td>
+</tr>
+
+<tr>
+	<td>type</td>
+	<td>id=name</td>
+	<td>#RecipentName#</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=pinyin_xing</td>
+	<td>#PinyinXing#</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=pinyin_ming</td>
+	<td>#PinyinMing#</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=zip</td>
+	<td>#Zip#</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tel</td>
+	<td>#Tel#</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tm</td>
+	<td>cotopboy</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=shipping_name_sunshinemilk</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//form[@id='addOrderForm']/div[2]/div/div/div/label[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.ui-dialog-autofocus</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=cardnumber</td>
+	<td>#CardId#</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>css=select.goods_name</td>
+	<td>#GoodNameId#</td>
+</tr>
+
+<tr>
+	<td>type</td>
+	<td>name=data[goodsnumber][]</td>
+	<td>#Count#</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=data[order_note]</td>
+	<td>#OrderDetail#</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=useSenderAddr</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//input[@id='kefu'])[2]</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

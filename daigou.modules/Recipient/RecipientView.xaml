@@ -97,7 +97,11 @@
                             
                         </ComboBox>
                         <TextBox Style="{StaticResource TB_NoBorder}" Text="{Binding OrderInfo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinHeight="50" FontSize="20" Foreground="DarkBlue" AcceptsReturn="True" TextWrapping="Wrap" Height="60"></TextBox>
-                        <Button  Content="添加到新订单" Name="BtnAddNewOrder" VerticalAlignment="Center" Command="{Binding AddToNewOrderCommand}" Height="36" Margin="10" Background="#821E90FF" />
+                        <StackPanel Orientation="Horizontal">
+                            <Button  Content="添加到新订单" Name="BtnAddNewOrder" VerticalAlignment="Center" Command="{Binding AddToNewOrderCommand}" Height="36" Margin="10" Background="#821E90FF" Width="113" />
+                            <Button  Content="生成包税脚本" Name="BtnGenTaxIncludedScript" VerticalAlignment="Center" Command="{Binding GenTaxScriptCommand}" Height="36" Margin="10" Background="#821E90FF" Width="113" />
+                            
+                        </StackPanel>
                     </StackPanel>
                 </Expander>
             
@@ -111,6 +115,7 @@
                     <StackPanel Orientation="Horizontal">
                         <Label   Content="姓名" HorizontalAlignment="Left" VerticalAlignment="Top" />
                         <Label   Content="{Binding Path=SelectedItem.PinyinName, ElementName=listView1,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFCB0A0A" FontFamily="Microsoft YaHei" FontWeight="Black" />
+                        
                     </StackPanel>
                     <TextBox Text="{Binding Path=SelectedItem.Name, ElementName=listView1,UpdateSourceTrigger=PropertyChanged}"
                          Foreground="{Binding Path=SelectedItem.ID, ElementName=listView1, Converter={StaticResource RecipientIDToColorConverter}}"
@@ -122,6 +127,10 @@
                 <Label   Content="{Binding Path=SelectedItem.CnAddress,Converter={StaticResource AddressSeperatorCounterConverter}}" HorizontalAlignment="Left" VerticalAlignment="Top" />
                 <TextBox  Text="{Binding Path=SelectedItem.CnAddress, ElementName=listView1,UpdateSourceTrigger=PropertyChanged}" FontSize="20"  Style="{StaticResource TB_NoBorder}"></TextBox>
 
+                <Label   Content="身份证号" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <TextBox  Text="{Binding Path=SelectedItem.CardId, ElementName=listView1,UpdateSourceTrigger=PropertyChanged}" FontSize="20"  Style="{StaticResource TB_NoBorder}"></TextBox>
+
+                
                 <Label   Content="备注" HorizontalAlignment="Left" VerticalAlignment="Top" />
                 <TextBox  Text="{Binding Path=SelectedItem.Remark, ElementName=listView1,UpdateSourceTrigger=PropertyChanged}" FontSize="20"  Style="{StaticResource TB_NoBorder}"></TextBox>
 

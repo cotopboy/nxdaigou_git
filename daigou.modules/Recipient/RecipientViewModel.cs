@@ -20,12 +20,14 @@ using daigou.domain.Base;
 using System.Xml.Serialization;
 using System.IO;
 using System.Globalization;
+using daigou.services.WebPageAutomation.DbStation;
 
 namespace daigou.modules.Recipient
 {
     public class RecipientViewModel : NotificationObject
     {
         private readonly DelegateCommand addToNewOrderCommand;
+        private readonly DelegateCommand genTaxScriptCommand;
         private readonly DelegateCommand cleanFilterTxtCommand;
         private readonly DelegateCommand loadRecipientListCommand;
         private readonly DelegateCommand printCNAddressLabelCommand;
@@ -137,6 +139,7 @@ namespace daigou.modules.Recipient
         private DirectoryService directoryService;
         private ICollectionView recipientCollectionView = null;
         private ObservableCollection<RecipientItemViewModel> recipientList = new ObservableCollection<RecipientItemViewModel>();
+        private readonly YangGuangMilkNewOrderScriptBuilder yangGuangMilkNewOrderScriptBuilder;
 
         private RecipientService recipientService;
         private string remarkTxt = string.Empty;
@@ -148,24 +151,24 @@ namespace daigou.modules.Recipient
 
         private ObservableCollection<OrderExampleItem> orderExampleList = new ObservableCollection<OrderExampleItem>() 
         {
-            new OrderExampleItem( "其它*","blue"),
-            new OrderExampleItem( "Ap 爱他美 Pre 段 X 6","#7700BFFF"),
-            new OrderExampleItem( "Ap 爱他美 1   段 X 6","#7700BFFF"),
-            new OrderExampleItem( "Ap 爱他美 2   段 X 6","#7700BFFF"),
-            new OrderExampleItem( "Ap 爱他美 3   段 X 6","#7700BFFF"),
-            new OrderExampleItem( "Ap 爱他美 1+  段 X 8","#7700BFFF"),
-            new OrderExampleItem( "Ap 爱他美 2+  段 X 8","#7700BFFF"),
+            new OrderExampleItem( "其它*"                 ,"blue"),
+            new OrderExampleItem( "Ap 爱他美 Pre 段 X 6"  ,"#7700BFFF"),
+            new OrderExampleItem( "Ap 爱他美 1   段 X 6"  ,"#7700BFFF"),
+            new OrderExampleItem( "Ap 爱他美 2   段 X 6"  ,"#7700BFFF"),
+            new OrderExampleItem( "Ap 爱他美 3   段 X 6"  ,"#7700BFFF"),
+            new OrderExampleItem( "Ap 爱他美 1+  段 X 8"  ,"#7700BFFF"),
+            new OrderExampleItem( "Ap 爱他美 2+  段 X 8"  ,"#7700BFFF"),
             new OrderExampleItem( "Combi益生菌 Pre 段 X 8","#77ADFF2F"),
             new OrderExampleItem( "Combi益生菌 1   段 X 8","#77ADFF2F"),
             new OrderExampleItem( "Combi益生菌 2   段 X 8","#77ADFF2F"),
             new OrderExampleItem( "Combi益生菌 3   段 X 8","#77ADFF2F"),
             new OrderExampleItem( "Combi益生菌 1+  段 X 8","#77ADFF2F"),
             new OrderExampleItem( "Combi益生菌 2+  段 X 8","#77ADFF2F"),
-            new OrderExampleItem( "Bio有机 Pre 段 X 8","#77008000"),
-            new OrderExampleItem( "Bio有机 1   段 X 8","#77008000"),
-            new OrderExampleItem( "Bio有机 2   段 X 6","#77008000"),
-            new OrderExampleItem( "Bio有机 3   段 X 6","#77008000"),
-            new OrderExampleItem( "Bio有机 1+  段 X 6","#77008000")                     
+            new OrderExampleItem( "Bio有机 Pre 段 X 8"   ,"#77008000"),
+            new OrderExampleItem( "Bio有机 1   段 X 8"   ,"#77008000"),
+            new OrderExampleItem( "Bio有机 2   段 X 6"   ,"#77008000"),
+            new OrderExampleItem( "Bio有机 3   段 X 6"   ,"#77008000"),
+            new OrderExampleItem( "Bio有机 1+  段 X 6"   ,"#77008000")                     
         };
 
         public ObservableCollection<OrderExampleItem> OrderExampleList
@@ -188,7 +191,8 @@ namespace daigou.modules.Recipient
             IEventAggregator eventAggregator,
             DirectoryService directoryService,
             CnRecipientLabelBuilder cnLabelPrinter,
-            AgentListService agentListSvc)
+            AgentListService agentListSvc,
+            YangGuangMilkNewOrderScriptBuilder yangGuangMilkNewOrderScriptBuilder)
         {
             this.recipientService = recipientService;
             this.agentListSvc = agentListSvc;
@@ -201,12 +205,15 @@ namespace daigou.modules.Recipient
             this.cleanFilterTxtCommand = new DelegateCommand(() => this.FilterTxt = string.Empty);
             this.printCNAddressLabelCommand = new DelegateCommand(PrintCNAddressLabel, CanExecutePrintCNAddressLabel);
             this.addToNewOrderCommand = new DelegateCommand(AddToNewOrder, CanAddToNewOrder);
+            this.genTaxScriptCommand = new DelegateCommand(GenTaxScript, CanGenTaxScript);
             this.addPhotoCommand = new DelegateCommand(AddPhotoFlag);
             this.addStampCommand = new DelegateCommand(AddStampFlat);
 
             this.eventAggregator = eventAggregator;
             this.cnLabelPrinter = cnLabelPrinter;
             this.directoryService = directoryService;
+
+            this.yangGuangMilkNewOrderScriptBuilder = yangGuangMilkNewOrderScriptBuilder;
 
             this.PropertyChanged += new PropertyChangedEventHandler(RecipientViewModel_PropertyChanged);
 
@@ -258,6 +265,11 @@ namespace daigou.modules.Recipient
         public DelegateCommand AddToNewOrderCommand
         {
             get { return addToNewOrderCommand; }
+        }
+
+        public DelegateCommand GenTaxScriptCommand
+        {
+            get { return genTaxScriptCommand; }
         }
 
         public DelegateCommand CleanFilterTxtCommand
@@ -382,6 +394,7 @@ namespace daigou.modules.Recipient
                 this.saveRecipientChangeCommand.RaiseCanExecuteChanged();
                 this.printCNAddressLabelCommand.RaiseCanExecuteChanged();
                 this.addToNewOrderCommand.RaiseCanExecuteChanged();
+                this.genTaxScriptCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -397,6 +410,22 @@ namespace daigou.modules.Recipient
             string fullOrderInfo = this.OrderInfo.Insert(0,this.SelectedOrderInfo + Environment.NewLine);
             var payload = new RecipientNewOrderAddedEventPayload(this.SelectedItem.ID, this.DeclarationInfo, fullOrderInfo);
             eventAggregator.GetEvent<RecipientNewOrderAddedEvent>().Publish(payload);
+        }
+
+        private void GenTaxScript()
+        {
+            string fullOrderInfo = this.OrderInfo.Insert(0, this.SelectedOrderInfo + Environment.NewLine);
+            var payload = new RecipientNewOrderAddedEventPayload(this.SelectedItem.ID, this.DeclarationInfo, fullOrderInfo);
+
+            string script = yangGuangMilkNewOrderScriptBuilder.BuildScript(payload);
+
+
+            try
+            {
+                Clipboard.SetText(script);
+            }
+            catch { }
+
         }
 
         private void AddStampFlat()
@@ -417,6 +446,12 @@ namespace daigou.modules.Recipient
         {
             return (this.SelectedItem != null);
         }
+
+        private bool CanGenTaxScript()
+        {
+            return (this.SelectedItem != null);
+        }
+
 
         private bool CanExeciteSaveRecipient(RecipientItemViewModel target)
         {

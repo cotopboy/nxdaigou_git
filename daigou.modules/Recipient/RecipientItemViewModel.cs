@@ -174,5 +174,15 @@ namespace daigou.modules.Recipient
             }
         }
 
+        public string CardId
+        {
+            get { return model.CardId; }
+            set
+            {
+                model.CardId = value;
+                RaisePropertyChanged("CardId");                
+            }
+        }
+
     }
 }
