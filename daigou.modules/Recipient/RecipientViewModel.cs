@@ -21,6 +21,7 @@ using System.Xml.Serialization;
 using System.IO;
 using System.Globalization;
 using daigou.services.WebPageAutomation.DbStation;
+using daigou.services.WebPageAutomation.Dt8ang;
 
 namespace daigou.modules.Recipient
 {
@@ -33,6 +34,7 @@ namespace daigou.modules.Recipient
         private readonly DelegateCommand printCNAddressLabelCommand;
         private readonly DelegateCommand copyRecipientInfoCommand;
         private readonly DelegateCommand backupRecipientCommand;
+        private readonly DelegateCommand genEmsScriptCommand;
         private readonly DelegateCommand addPhotoCommand;
 
         
@@ -140,6 +142,7 @@ namespace daigou.modules.Recipient
         private ICollectionView recipientCollectionView = null;
         private ObservableCollection<RecipientItemViewModel> recipientList = new ObservableCollection<RecipientItemViewModel>();
         private readonly YangGuangMilkNewOrderScriptBuilder yangGuangMilkNewOrderScriptBuilder;
+        private readonly EMSNewOrderScriptBuilder eMSNewOrderScriptBuilder;
 
         private RecipientService recipientService;
         private string remarkTxt = string.Empty;
@@ -182,7 +185,12 @@ namespace daigou.modules.Recipient
         public string SelectedOrderInfo
         {
             get { return selectedOrderInfo; }
-            set { selectedOrderInfo = value; RaisePropertyChanged("SelectedOrderInfo"); }
+            set 
+            {
+                selectedOrderInfo = value; 
+                RaisePropertyChanged("SelectedOrderInfo");
+                this.genTaxScriptCommand.RaiseCanExecuteChanged();
+            }
         }
 
         public RecipientViewModel(
@@ -192,7 +200,8 @@ namespace daigou.modules.Recipient
             DirectoryService directoryService,
             CnRecipientLabelBuilder cnLabelPrinter,
             AgentListService agentListSvc,
-            YangGuangMilkNewOrderScriptBuilder yangGuangMilkNewOrderScriptBuilder)
+            YangGuangMilkNewOrderScriptBuilder yangGuangMilkNewOrderScriptBuilder,
+            EMSNewOrderScriptBuilder eMSNewOrderScriptBuilder)
         {
             this.recipientService = recipientService;
             this.agentListSvc = agentListSvc;
@@ -206,6 +215,7 @@ namespace daigou.modules.Recipient
             this.printCNAddressLabelCommand = new DelegateCommand(PrintCNAddressLabel, CanExecutePrintCNAddressLabel);
             this.addToNewOrderCommand = new DelegateCommand(AddToNewOrder, CanAddToNewOrder);
             this.genTaxScriptCommand = new DelegateCommand(GenTaxScript, CanGenTaxScript);
+            this.genEmsScriptCommand = new DelegateCommand(GenEmsScript, CanGenEmsScript);
             this.addPhotoCommand = new DelegateCommand(AddPhotoFlag);
             this.addStampCommand = new DelegateCommand(AddStampFlat);
 
@@ -214,6 +224,7 @@ namespace daigou.modules.Recipient
             this.directoryService = directoryService;
 
             this.yangGuangMilkNewOrderScriptBuilder = yangGuangMilkNewOrderScriptBuilder;
+            this.eMSNewOrderScriptBuilder = eMSNewOrderScriptBuilder;
 
             this.PropertyChanged += new PropertyChangedEventHandler(RecipientViewModel_PropertyChanged);
 
@@ -272,18 +283,15 @@ namespace daigou.modules.Recipient
             get { return genTaxScriptCommand; }
         }
 
+        public DelegateCommand GenEmsScriptCommand
+        {
+            get { return genEmsScriptCommand; }
+        }
+
         public DelegateCommand CleanFilterTxtCommand
         {
             get { return cleanFilterTxtCommand; }
         }
-
-        //public string PinyingName
-        //{
-        //    get 
-        //    {
-        //        if(this.sel
-        //    }
-        //}
 
         public string CnLabelKgValue
         {
@@ -395,6 +403,7 @@ namespace daigou.modules.Recipient
                 this.printCNAddressLabelCommand.RaiseCanExecuteChanged();
                 this.addToNewOrderCommand.RaiseCanExecuteChanged();
                 this.genTaxScriptCommand.RaiseCanExecuteChanged();
+                this.genEmsScriptCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -426,6 +435,23 @@ namespace daigou.modules.Recipient
             }
             catch { }
 
+            this.SelectedOrderInfo = "";
+
+        }
+        
+        private void GenEmsScript()
+        {
+            string fullOrderInfo = this.OrderInfo.Insert(0, this.SelectedOrderInfo + Environment.NewLine);
+            var payload = new RecipientNewOrderAddedEventPayload(this.SelectedItem.ID, this.DeclarationInfo, fullOrderInfo);
+
+            string script = this.eMSNewOrderScriptBuilder.BuildScript(payload);
+
+
+            try
+            {
+                Clipboard.SetText(script);
+            }
+            catch { }
         }
 
         private void AddStampFlat()
@@ -447,9 +473,14 @@ namespace daigou.modules.Recipient
             return (this.SelectedItem != null);
         }
 
-        private bool CanGenTaxScript()
+        private bool CanGenEmsScript()
         {
             return (this.SelectedItem != null);
+        }
+
+        private bool CanGenTaxScript()
+        {
+            return (this.SelectedItem != null && SelectedOrderInfo.Length >0);
         }
 
 

@@ -98,9 +98,9 @@
                         </ComboBox>
                         <TextBox Style="{StaticResource TB_NoBorder}" Text="{Binding OrderInfo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinHeight="50" FontSize="20" Foreground="DarkBlue" AcceptsReturn="True" TextWrapping="Wrap" Height="60"></TextBox>
                         <StackPanel Orientation="Horizontal">
-                            <Button  Content="添加到新订单" Name="BtnAddNewOrder" VerticalAlignment="Center" Command="{Binding AddToNewOrderCommand}" Height="36" Margin="10" Background="#821E90FF" Width="113" />
-                            <Button  Content="生成包税脚本" Name="BtnGenTaxIncludedScript" VerticalAlignment="Center" Command="{Binding GenTaxScriptCommand}" Height="36" Margin="10" Background="#821E90FF" Width="113" />
-                            
+                            <Button  Content="添加到新订单" Name="BtnAddNewOrder" VerticalAlignment="Center" Command="{Binding AddToNewOrderCommand}" Height="36" Margin="10" Background="#821E90FF"  />
+                            <Button  Content="生成包税脚本" Name="BtnGenTaxIncludedScript" VerticalAlignment="Center" Command="{Binding GenTaxScriptCommand}" Height="36" Margin="10" Background="LightGreen" />
+                            <Button  Content="生成EMS脚本" Name="BtnEMSScript" VerticalAlignment="Center" Command="{Binding GenEmsScriptCommand}" Height="36" Margin="10" Background="Yellow"  />
                         </StackPanel>
                     </StackPanel>
                 </Expander>

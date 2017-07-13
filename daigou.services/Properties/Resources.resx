@@ -124,6 +124,9 @@
   <data name="CX_Template" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CX_Template.xls;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="EMSNewOrderScriptTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\webpageautomation\dt8ang\scripttemplate\emsneworderscripttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="EMS_Template" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\ems_template.xls;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

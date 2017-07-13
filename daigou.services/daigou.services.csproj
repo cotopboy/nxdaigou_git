@@ -145,6 +145,7 @@
     <Compile Include="Bpost\ZdBpostWaybillPrinter.cs" />
     <Compile Include="WebPageAutomation\DbStation\Product2CodeMapping.cs" />
     <Compile Include="WebPageAutomation\DbStation\YangGuangMilkNewOrderScriptBuilder.cs" />
+    <Compile Include="WebPageAutomation\Dt8ang\EMSNewOrderScriptBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\daigou.domain\daigou.domain.csproj">
@@ -168,7 +169,9 @@
     <None Include="Resources\EMS_Template.xls" />
     <None Include="Resources\ZD_Bpost_Template.xls" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="WebPageAutomation\Dt8ang\ScriptTemplate\EMSNewOrderScriptTemplate.html" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="WebPageAutomation\DbStation\ScriptTemplate\YangGuangMilkNewOrderScriptTemplate.html" />
   </ItemGroup>
