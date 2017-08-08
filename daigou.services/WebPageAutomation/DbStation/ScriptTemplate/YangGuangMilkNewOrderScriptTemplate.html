@@ -56,18 +56,29 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>id=shipping_name_sunshinemilk</td>
+	<td>id=shipping_name_sunshine2</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//form[@id='addOrderForm']/div[2]/div/div/div/label[5]</td>
-	<td></td>
+	<td>type</td>
+	<td>id=packageLength</td>
+	<td>38</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>css=button.ui-dialog-autofocus</td>
-	<td></td>
+	<td>type</td>
+	<td>id=packageWidth</td>
+	<td>28</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=packageHeight</td>
+	<td>20</td>
+</tr>
+
+<tr>
+	<td>type</td>
+	<td>id=order_weight</td>
+	<td>7</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -121,6 +132,86 @@
 	<td>id=address</td>
 	<td>#Address#</td>
 </tr>
+
+<tr>
+	<td>click</td>
+	<td>link=选择商品</td>
+	<td></td>
+</tr>
+
+<tr>
+	<td>waitForTextPresent</td>
+	<td>搜索</td>
+	<td></td>
+</tr>
+
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+
+<tr>
+	<td>clickAndWait</td>
+	<td>link=所有</td>
+	<td></td>
+</tr>
+
+<tr>
+	<td>type</td>
+	<td>name=keywords</td>
+	<td>#BarCode#</td>
+</tr>
+
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn.btn-default</td>
+	<td></td>
+</tr>
+
+<tr>
+	<td>click</td>
+	<td>link=添加</td>
+	<td></td>
+</tr>
+
+<tr>
+	<td>waitForTextPresent</td>
+	<td>确定</td>
+	<td></td>
+</tr>
+
+
+<tr>
+	<td>click</td>
+	<td>css=button:contains("确定")</td>
+	<td></td>
+</tr>
+
+<tr>
+	<td>click</td>
+	<td>css=button.close</td>
+	<td></td>
+</tr>
+
+<tr>
+	<td>type</td>
+	<td>name=data[good_quantity][]</td>
+	<td>#Count#</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>window.scrollBy(0,800)</td>
+	<td></td>
+</tr>
+
+<tr>
+	<td>fireEvent</td>
+	<td>id=packageHeight</td>
+	<td>input</td>
+</tr>
+
+
 </tbody></table>
 </body>
 </html>

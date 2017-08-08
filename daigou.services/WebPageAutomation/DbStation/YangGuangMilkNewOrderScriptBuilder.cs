@@ -47,7 +47,7 @@ namespace daigou.services.WebPageAutomation.DbStation
             dict.Add("#Zip#", recipient.PostCode);
             dict.Add("#Tel#", recipient.MainTel);
             dict.Add("#CardId#", recipient.CardId);
-            dict.Add("#GoodNameId#", this.production2CodeSvc.GetCode(payload.OrderInfo));
+            dict.Add("#BarCode#", this.production2CodeSvc.GetCode(payload.OrderInfo));
             dict.Add("#Count#", GetDefaultCount(payload.OrderInfo));
             dict.Add("#OrderNote#", GetOrderNote(recipient,payload));
 
